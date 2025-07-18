@@ -11,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, Bell, Target, MapPin, Phone, Mail, Video } from "lucide-react"
+import { useReminders } from "@/hooks/use-reminders"
+import { useToast } from "@/hooks/use-toast"
 
 interface ScheduleDialogProps {
   children: React.ReactNode
@@ -19,6 +21,8 @@ interface ScheduleDialogProps {
 export function ScheduleDialog({ children }: ScheduleDialogProps) {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { addReminder } = useReminders()
+  const { toast } = useToast()
   const [scheduleData, setScheduleData] = useState({
     title: "",
     type: "interview" as "interview" | "follow-up" | "deadline" | "reminder",
@@ -34,9 +38,22 @@ export function ScheduleDialog({ children }: ScheduleDialogProps) {
     setIsLoading(true)
 
     try {
-      // Here you would save the schedule item
-      // For now, we'll just show a success message
-      console.log("Schedule created:", scheduleData)
+      // Create the scheduled event as a reminder
+      const eventDateTime = new Date(`${scheduleData.date}T${scheduleData.time}`)
+      
+      addReminder({
+        title: scheduleData.title,
+        description: scheduleData.description || undefined,
+        dueDate: eventDateTime,
+        type: scheduleData.type === "reminder" ? "general" : scheduleData.type,
+        isCompleted: false,
+        priority: scheduleData.type === "deadline" ? "high" : scheduleData.type === "interview" ? "medium" : "low",
+      })
+
+      toast({
+        title: "Event Scheduled",
+        description: `${scheduleData.title} has been scheduled and added to your reminders`,
+      })
       
       // Reset form
       setScheduleData({
@@ -51,6 +68,11 @@ export function ScheduleDialog({ children }: ScheduleDialogProps) {
       setOpen(false)
     } catch (error) {
       console.error("Error creating schedule:", error)
+      toast({
+        title: "Error",
+        description: "Failed to create scheduled event",
+        variant: "destructive",
+      })
     } finally {
       setIsLoading(false)
     }
