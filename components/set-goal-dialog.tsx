@@ -9,7 +9,18 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useGoals } from "@/hooks/use-goals"
-import { Target, TrendingUp, Calendar, Zap } from "lucide-react"
+import { Target, TrendingUp, Calendar, Zap, Trash2 } from "lucide-react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 interface SetGoalDialogProps {
   children: React.ReactNode
@@ -19,7 +30,7 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
   const [open, setOpen] = useState(false)
   const [goalTarget, setGoalTarget] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { getCurrentMonthGoal, setMonthlyGoal } = useGoals()
+  const { getCurrentMonthGoal, setMonthlyGoal, removeMonthlyGoal } = useGoals()
 
   const currentGoal = getCurrentMonthGoal()
   const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
@@ -40,6 +51,19 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
       setOpen(false)
     } catch (error) {
       console.error("Error setting goal:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleRemoveGoal = async () => {
+    setIsLoading(true)
+    try {
+      removeMonthlyGoal()
+      setGoalTarget("")
+      setOpen(false)
+    } catch (error) {
+      console.error("Error removing goal:", error)
     } finally {
       setIsLoading(false)
     }
@@ -68,8 +92,34 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
                     <p className="text-sm text-muted-foreground">Current Goal for {currentMonth}</p>
                     <p className="text-2xl font-bold text-green-600">{currentGoal.target} applications</p>
                   </div>
-                  <div className="flex items-center text-green-600">
-                    <Zap className="h-5 w-5" />
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center text-green-600">
+                      <Zap className="h-5 w-5" />
+                    </div>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Remove Goal</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to remove your monthly goal? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleRemoveGoal}
+                            className="bg-red-600 hover:bg-red-700"
+                          >
+                            Remove Goal
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </div>
               </CardContent>

@@ -105,6 +105,22 @@ export function useGoals() {
     }
   }
 
+  // Remove monthly goal
+  const removeMonthlyGoal = () => {
+    const currentGoal = getCurrentMonthGoal()
+    if (!currentGoal) return
+
+    const updatedGoals = goals.filter(goal => goal.id !== currentGoal.id)
+    setGoals(updatedGoals)
+    saveGoalsToStorage(updatedGoals)
+
+    toast({
+      title: "Goal Removed",
+      description: "Monthly goal has been removed",
+      variant: "destructive",
+    })
+  }
+
   // Calculate progress for current month
   const calculateMonthlyProgress = (jobsThisMonth: number): { percentage: number; remaining: number } => {
     const currentGoal = getCurrentMonthGoal()
@@ -121,6 +137,7 @@ export function useGoals() {
     isLoading,
     getCurrentMonthGoal,
     setMonthlyGoal,
+    removeMonthlyGoal,
     calculateMonthlyProgress,
   }
 }

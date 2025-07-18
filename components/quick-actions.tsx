@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Plus, Target, Calendar, Bell } from "lucide-react"
 import { AddJobDialog } from "@/components/add-job-dialog"
 import { SetGoalDialog } from "@/components/set-goal-dialog"
+import { ScheduleDialog } from "@/components/schedule-dialog"
 
 export function QuickActions() {
   return (
@@ -26,10 +27,12 @@ export function QuickActions() {
             </Button>
           </SetGoalDialog>
 
-          <Button variant="outline" className="hover:bg-purple-50 dark:hover:bg-purple-900/20 bg-transparent">
-            <Calendar className="h-4 w-4 mr-2 text-purple-600" />
-            Schedule
-          </Button>
+          <ScheduleDialog>
+            <Button variant="outline" className="hover:bg-purple-50 dark:hover:bg-purple-900/20 bg-transparent">
+              <Calendar className="h-4 w-4 mr-2 text-purple-600" />
+              Schedule
+            </Button>
+          </ScheduleDialog>
 
           <div className="flex items-center gap-2 ml-4">
             <Badge variant="secondary" className="flex items-center gap-1">
