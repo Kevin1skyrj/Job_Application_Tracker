@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Target, Calendar, Bell } from "lucide-react"
 import { AddJobDialog } from "@/components/add-job-dialog"
+import { SetGoalDialog } from "@/components/set-goal-dialog"
 
 export function QuickActions() {
   return (
@@ -18,10 +19,12 @@ export function QuickActions() {
             </Button>
           </AddJobDialog>
 
-          <Button variant="outline" className="hover:bg-green-50 dark:hover:bg-green-900/20 bg-transparent">
-            <Target className="h-4 w-4 mr-2 text-green-600" />
-            Set Goal
-          </Button>
+          <SetGoalDialog>
+            <Button variant="outline" className="hover:bg-green-50 dark:hover:bg-green-900/20 bg-transparent">
+              <Target className="h-4 w-4 mr-2 text-green-600" />
+              Set Goal
+            </Button>
+          </SetGoalDialog>
 
           <Button variant="outline" className="hover:bg-purple-50 dark:hover:bg-purple-900/20 bg-transparent">
             <Calendar className="h-4 w-4 mr-2 text-purple-600" />

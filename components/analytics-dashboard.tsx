@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts"
 import { TrendingUp, TrendingDown, Target, Calendar, Award, Zap } from "lucide-react"
+import { useJobs } from "@/hooks/use-jobs"
+import { useGoals } from "@/hooks/use-goals"
 
 // Mock data - replace with real data from your backend
 const applicationTrends = [
@@ -31,6 +33,19 @@ const companyTypes = [
 ]
 
 export function AnalyticsDashboard() {
+  const { jobs } = useJobs()
+  const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals()
+
+  // Calculate current month applications
+  const currentMonth = new Date().getMonth()
+  const currentYear = new Date().getFullYear()
+  const jobsThisMonth = jobs?.filter(job => {
+    const jobDate = new Date(job.appliedDate)
+    return jobDate.getMonth() === currentMonth && jobDate.getFullYear() === currentYear
+  }).length || 0
+
+  const currentGoal = getCurrentMonthGoal()
+  const progress = calculateMonthlyProgress(jobsThisMonth)
   return (
     <div className="space-y-8">
       {/* Key Metrics */}
@@ -83,11 +98,29 @@ export function AnalyticsDashboard() {
             <Zap className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">85%</div>
-            <div className="flex items-center text-xs text-purple-600">
-              <Target className="h-3 w-3 mr-1" />
-              17/20 applications
-            </div>
+            {currentGoal ? (
+              <>
+                <div className="text-2xl font-bold">{Math.min(progress.percentage, 100)}%</div>
+                <div className="flex items-center text-xs text-purple-600">
+                  <Target className="h-3 w-3 mr-1" />
+                  {jobsThisMonth}/{currentGoal.target} applications
+                </div>
+                {progress.percentage >= 100 && (
+                  <div className="mt-1 text-xs text-green-600 font-medium">🎉 Goal achieved!</div>
+                )}
+                {progress.remaining > 0 && progress.percentage < 100 && (
+                  <div className="mt-1 text-xs text-orange-600">{progress.remaining} more to go</div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="text-2xl font-bold text-muted-foreground">--</div>
+                <div className="flex items-center text-xs text-muted-foreground">
+                  <Target className="h-3 w-3 mr-1" />
+                  No goal set
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -149,7 +182,7 @@ export function AnalyticsDashboard() {
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    label={({ name, percent }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
                   >
                     {statusDistribution.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />

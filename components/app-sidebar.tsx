@@ -16,6 +16,7 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AddJobDialog } from "@/components/add-job-dialog"
+import { SetGoalDialog } from "@/components/set-goal-dialog"
 
 const menuItems = [
   {
@@ -101,11 +102,16 @@ export function AppSidebar() {
                         <span className="font-medium">{action.title}</span>
                       </SidebarMenuButton>
                     </AddJobDialog>
+                  ) : action.action === "set-goal" ? (
+                    <SetGoalDialog>
+                      <SidebarMenuButton className="h-11 px-4 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all duration-200 w-full">
+                        <action.icon className="h-5 w-5 mr-3 text-purple-600" />
+                        <span className="font-medium">{action.title}</span>
+                      </SidebarMenuButton>
+                    </SetGoalDialog>
                   ) : (
-                    <SidebarMenuButton className="h-11 px-4 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all duration-200 w-full">
-                      {" "}
-                      {/* Added w-full for consistency */}
-                      <action.icon className="h-5 w-5 mr-3 text-purple-600" />
+                    <SidebarMenuButton className="h-11 px-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900/20 transition-all duration-200 w-full">
+                      <action.icon className="h-5 w-5 mr-3 text-gray-600" />
                       <span className="font-medium">{action.title}</span>
                     </SidebarMenuButton>
                   )}

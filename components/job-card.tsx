@@ -12,7 +12,7 @@ import {
   Trash2,
   ExternalLink,
   MapPin,
-  DollarSign,
+  IndianRupee,
   Clock,
 } from "lucide-react"
 import type { Job } from "@/types/job"
@@ -52,10 +52,10 @@ export function JobCard({ job }: JobCardProps) {
 
   return (
     <>
-      <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-md hover:-translate-y-1">
+      <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-md hover:-translate-y-1 overflow-hidden">
         <CardContent className="p-5">
           <div className="flex items-start justify-between mb-4">
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 pr-2">
               <h3 className="font-bold text-base mb-2 line-clamp-1 text-gray-900 dark:text-white">{job.title}</h3>
               <div className="flex items-center text-muted-foreground text-sm mb-3">
                 <Building2 className="h-4 w-4 mr-2 flex-shrink-0" />
@@ -93,16 +93,16 @@ export function JobCard({ job }: JobCardProps) {
           </div>
 
           {/* Location and Salary */}
-          <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+          <div className="space-y-2 mb-4">
             {job.location && (
-              <div className="flex items-center">
-                <MapPin className="h-3 w-3 mr-1" />
+              <div className="flex items-center text-sm text-muted-foreground">
+                <MapPin className="h-3 w-3 mr-2 flex-shrink-0" />
                 <span className="truncate">{job.location}</span>
               </div>
             )}
             {job.salary && (
-              <div className="flex items-center text-green-600 dark:text-green-400 font-medium">
-                <DollarSign className="h-3 w-3 mr-1" />
+              <div className="flex items-center text-sm text-green-600 dark:text-green-400 font-medium">
+                <IndianRupee className="h-3 w-3 mr-2 flex-shrink-0" />
                 <span className="truncate">{job.salary}</span>
               </div>
             )}
@@ -116,7 +116,7 @@ export function JobCard({ job }: JobCardProps) {
 
           {/* Notes */}
           {job.notes && (
-            <p className="text-sm text-muted-foreground line-clamp-2 mb-4 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-4 bg-gray-50 dark:bg-gray-700/50 p-2.5 rounded-md border-l-2 border-blue-200 dark:border-blue-800">
               {job.notes}
             </p>
           )}

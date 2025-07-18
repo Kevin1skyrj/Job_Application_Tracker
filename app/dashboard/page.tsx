@@ -1,6 +1,7 @@
 import { JobBoard } from "@/components/job-board"
 import { JobStats } from "@/components/job-stats"
 import { QuickActions } from "@/components/quick-actions"
+import { GoalProgressIndicator } from "@/components/goal-progress-indicator"
 
 export default function DashboardPage() {
   return (
@@ -13,6 +14,7 @@ export default function DashboardPage() {
         <QuickActions />
       </div>
 
+      <GoalProgressIndicator />
       <JobStats />
       <JobBoard />
     </div>

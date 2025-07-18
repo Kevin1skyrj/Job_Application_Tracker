@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useJobs } from "@/hooks/use-jobs"
 import type { Job } from "@/types/job"
-import { Building2, MapPin, DollarSign, Link, FileText } from "lucide-react"
+import { Building2, MapPin, IndianRupee, Link, FileText } from "lucide-react"
 
 interface AddJobDialogProps {
   children: React.ReactNode
@@ -117,14 +117,14 @@ export function AddJobDialog({ children }: AddJobDialogProps) {
 
             <div className="space-y-2">
               <Label htmlFor="salary" className="text-sm font-semibold flex items-center">
-                <DollarSign className="h-4 w-4 mr-2" />
+                <IndianRupee className="h-4 w-4 mr-2" />
                 Salary Range
               </Label>
               <Input
                 id="salary"
                 value={formData.salary}
                 onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
-                placeholder="$80k - $120k"
+                placeholder="₹8L - ₹12L"
                 className="h-11"
               />
             </div>

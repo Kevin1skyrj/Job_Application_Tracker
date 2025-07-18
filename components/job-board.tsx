@@ -18,29 +18,33 @@ const columns = [
     id: "applied",
     title: "Applied",
     color: "bg-blue-500",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+    bgColor: "bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10",
     textColor: "text-blue-700 dark:text-blue-300",
+    icon: "📝",
   },
   {
     id: "interviewing",
     title: "Interviewing",
     color: "bg-yellow-500",
-    bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+    bgColor: "bg-gradient-to-br from-yellow-50 to-yellow-100/50 dark:from-yellow-900/20 dark:to-yellow-800/10",
     textColor: "text-yellow-700 dark:text-yellow-300",
+    icon: "💬",
   },
   {
     id: "offer",
     title: "Offer",
     color: "bg-green-500",
-    bgColor: "bg-green-50 dark:bg-green-900/20",
+    bgColor: "bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-800/10",
     textColor: "text-green-700 dark:text-green-300",
+    icon: "🎉",
   },
   {
     id: "rejected",
     title: "Rejected",
     color: "bg-red-500",
-    bgColor: "bg-red-50 dark:bg-red-900/20",
+    bgColor: "bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-900/20 dark:to-red-800/10",
     textColor: "text-red-700 dark:text-red-300",
+    icon: "❌",
   },
 ]
 
@@ -158,26 +162,67 @@ export function JobBoard() {
 
       {/* Kanban Board */}
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {columns.map((column) => {
-            const columnJobs = getJobsByStatus(column.id)
-
-            return (
-              <Card key={column.id} className={`flex flex-col h-fit min-h-96 shadow-lg border-0 ${column.bgColor}`}>
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-4 h-4 rounded-full ${column.color} shadow-lg`} />
-                      <CardTitle className={`text-sm font-bold ${column.textColor}`}>{column.title}</CardTitle>
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className={`${column.textColor} bg-white/50 dark:bg-gray-800/50 font-semibold`}
-                    >
-                      {columnJobs.length}
-                    </Badge>
+        <div className="relative">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
+            {/* Vertical separators between columns */}
+            <div className="hidden lg:flex w-full justify-between px-3">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="relative">
+                  <div className="h-full w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent dark:via-gray-700" />
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 shadow-lg opacity-60" />
                   </div>
-                </CardHeader>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+            {columns.map((column, columnIndex) => {
+              const columnJobs = getJobsByStatus(column.id)
+
+              return (
+                <div key={column.id} className="relative">
+                  {/* Column separator line for mobile/tablet */}
+                  {columnIndex > 0 && (
+                    <div className="lg:hidden absolute -top-3 left-0 right-0 flex justify-center">
+                      <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-600" />
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 shadow-sm opacity-70" />
+                      </div>
+                    </div>
+                  )}
+                  
+                  <Card 
+                    key={column.id} 
+                    className={`flex flex-col h-fit min-h-96 shadow-xl border-0 ${column.bgColor} backdrop-blur-sm relative overflow-hidden group hover:shadow-2xl transition-all duration-300`}
+                  >
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5 pointer-events-none" />
+                    
+                    {/* Top accent line */}
+                    <div className={`absolute top-0 left-0 right-0 h-1 ${column.color} shadow-sm`} />
+                    
+                    <CardHeader className="pb-4 relative z-10">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2">
+                            <div className={`w-4 h-4 rounded-full ${column.color} shadow-lg ring-2 ring-white/50 dark:ring-gray-800/50`} />
+                            <span className="text-lg">{column.icon}</span>
+                          </div>
+                          <CardTitle className={`text-sm font-bold ${column.textColor}`}>{column.title}</CardTitle>
+                        </div>
+                        <Badge
+                          variant="secondary"
+                          className={`${column.textColor} bg-white/70 dark:bg-gray-800/70 font-semibold shadow-sm backdrop-blur-sm border border-white/30`}
+                        >
+                          {columnJobs.length}
+                        </Badge>
+                      </div>
+                      {/* Decorative bottom border */}
+                      <div className="mt-3 w-full h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
+                    </CardHeader>
 
                 <Droppable droppableId={column.id}>
                   {(provided, snapshot) => (
@@ -218,9 +263,11 @@ export function JobBoard() {
                     </CardContent>
                   )}
                 </Droppable>
-              </Card>
-            )
-          })}
+                  </Card>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </DragDropContext>
     </div>
