@@ -18,6 +18,7 @@ import {
 import type { Job } from "@/types/job"
 import { formatDistanceToNow } from "date-fns"
 import { EditJobDialog } from "@/components/edit-job-dialog"
+import { JobDetailsDialog } from "@/components/job-details-dialog"
 import { useState } from "react"
 import { useJobs } from "@/hooks/use-jobs"
 
@@ -27,6 +28,7 @@ interface JobCardProps {
 
 export function JobCard({ job }: JobCardProps) {
   const [showEditDialog, setShowEditDialog] = useState(false)
+  const [showDetailsDialog, setShowDetailsDialog] = useState(false)
   const { deleteJob } = useJobs()
 
   const handleDelete = async () => {
@@ -52,7 +54,10 @@ export function JobCard({ job }: JobCardProps) {
 
   return (
     <>
-      <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-md hover:-translate-y-1 overflow-hidden">
+      <Card 
+        className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-md hover:-translate-y-1 overflow-hidden"
+        onClick={() => setShowDetailsDialog(true)}
+      >
         <CardContent className="p-5">
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1 min-w-0 pr-2">
@@ -69,22 +74,39 @@ export function JobCard({ job }: JobCardProps) {
                   variant="ghost"
                   size="sm"
                   className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <MoreHorizontal className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem onClick={() => setShowEditDialog(true)}>
+                <DropdownMenuItem onClick={(e) => {
+                  e.stopPropagation()
+                  setShowDetailsDialog(true)
+                }}>
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  View Details
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => {
+                  e.stopPropagation()
+                  setShowEditDialog(true)
+                }}>
                   <Edit className="h-4 w-4 mr-2" />
                   Edit Application
                 </DropdownMenuItem>
                 {job.jobUrl && (
-                  <DropdownMenuItem onClick={() => window.open(job.jobUrl, "_blank")}>
+                  <DropdownMenuItem onClick={(e) => {
+                    e.stopPropagation()
+                    window.open(job.jobUrl, "_blank")
+                  }}>
                     <ExternalLink className="h-4 w-4 mr-2" />
                     View Job Posting
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem onClick={handleDelete} className="text-destructive">
+                <DropdownMenuItem onClick={(e) => {
+                  e.stopPropagation()
+                  handleDelete()
+                }} className="text-destructive">
                   <Trash2 className="h-4 w-4 mr-2" />
                   Delete
                 </DropdownMenuItem>
@@ -137,6 +159,7 @@ export function JobCard({ job }: JobCardProps) {
         </CardContent>
       </Card>
 
+      <JobDetailsDialog job={job} open={showDetailsDialog} onOpenChange={setShowDetailsDialog} />
       <EditJobDialog job={job} open={showEditDialog} onOpenChange={setShowEditDialog} />
     </>
   )
