@@ -58,12 +58,12 @@ export function JobCard({ job }: JobCardProps) {
         className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-md hover:-translate-y-1 overflow-hidden"
         onClick={() => setShowDetailsDialog(true)}
       >
-        <CardContent className="p-5">
-          <div className="flex items-start justify-between mb-4">
+        <CardContent className="p-3">
+          <div className="flex items-start justify-between mb-3">
             <div className="flex-1 min-w-0 pr-2">
-              <h3 className="font-bold text-base mb-2 line-clamp-1 text-gray-900 dark:text-white">{job.title}</h3>
-              <div className="flex items-center text-muted-foreground text-sm mb-3">
-                <Building2 className="h-4 w-4 mr-2 flex-shrink-0" />
+              <h3 className="font-semibold text-sm mb-1 line-clamp-1 text-gray-900 dark:text-white">{job.title}</h3>
+              <div className="flex items-center text-muted-foreground text-xs mb-2">
+                <Building2 className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="line-clamp-1 font-medium">{job.company}</span>
               </div>
             </div>
@@ -73,10 +73,10 @@ export function JobCard({ job }: JobCardProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <MoreHorizontal className="h-4 w-4" />
+                  <MoreHorizontal className="h-3 w-3" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
@@ -115,30 +115,30 @@ export function JobCard({ job }: JobCardProps) {
           </div>
 
           {/* Location and Salary */}
-          <div className="space-y-2 mb-4">
+          <div className="space-y-1 mb-3">
             {job.location && (
-              <div className="flex items-center text-sm text-muted-foreground">
-                <MapPin className="h-3 w-3 mr-2 flex-shrink-0" />
+              <div className="flex items-center text-xs text-muted-foreground">
+                <MapPin className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="truncate">{job.location}</span>
               </div>
             )}
             {job.salary && (
-              <div className="flex items-center text-sm text-green-600 dark:text-green-400 font-medium">
-                <IndianRupee className="h-3 w-3 mr-2 flex-shrink-0" />
+              <div className="flex items-center text-xs text-green-600 dark:text-green-400 font-medium">
+                <IndianRupee className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="truncate">{job.salary}</span>
               </div>
             )}
           </div>
 
           {/* Applied Date */}
-          <div className="flex items-center text-xs text-muted-foreground mb-4">
+          <div className="flex items-center text-xs text-muted-foreground mb-3">
             <Calendar className="h-3 w-3 mr-1" />
             <span>Applied {formatDistanceToNow(new Date(job.appliedDate), { addSuffix: true })}</span>
           </div>
 
           {/* Notes */}
           {job.notes && (
-            <p className="text-sm text-muted-foreground line-clamp-2 mb-4 bg-gray-50 dark:bg-gray-700/50 p-2.5 rounded-md border-l-2 border-blue-200 dark:border-blue-800">
+            <p className="text-xs text-muted-foreground line-clamp-2 mb-3 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-md border-l-2 border-blue-200 dark:border-blue-800">
               {job.notes}
             </p>
           )}
