@@ -64,7 +64,7 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* <div className="grid md:grid-cols-2 gap-6">
           <Card className="shadow-lg border-0">
             <CardHeader>
               <CardTitle className="flex items-center">
@@ -113,9 +113,9 @@ export default function SettingsPage() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
-        <Card className="shadow-lg border-0">
+        {/* <Card className="shadow-lg border-0">
           <CardHeader>
             <CardTitle>Data Management</CardTitle>
             <CardDescription>Export or delete your data</CardDescription>
@@ -142,10 +142,10 @@ export default function SettingsPage() {
               </Button>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Security Section */}
-        <Card className="shadow-lg border-0">
+        {/* <Card className="shadow-lg border-0">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Shield className="h-5 w-5 mr-2" />
@@ -176,7 +176,7 @@ export default function SettingsPage() {
               <Button variant="outline">View Sessions</Button>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   )

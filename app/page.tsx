@@ -19,11 +19,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="relative">
-              <Briefcase className="h-8 w-8 text-blue-600" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-            </div>
-            <div>
-              <span className="text-2xl font-bold gradient-text">JobTracker</span>
+              <img 
+                src="/logo/logoJobflow.png" 
+                alt="JobFlow Logo" 
+                className="h-10 w-auto object-contain -my-2" 
+              />
             </div>
           </div>
           <div className="flex items-center space-x-4">
@@ -51,7 +51,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Organize, manage, and optimize your job search with our intelligent Kanban board. Get insights, track
+            Organize, manage, and optimize your job search with our intelligent Job Tracker board. Get insights, track
             progress, and land your dream job faster.
           </p>
 
@@ -347,9 +347,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Briefcase className="h-6 w-6 text-blue-600" />
-                <span className="text-xl font-bold">JobTracker</span>
+              <div className="flex items-center space-x-2">
+                <img 
+                  src="/logo/logoJobflow.png" 
+                  alt="JobFlow Logo" 
+                  className="h-10 w-auto object-contain" 
+                />
               </div>
               <p className="text-gray-600 dark:text-gray-400">
                 The smartest way to track and manage your job applications.

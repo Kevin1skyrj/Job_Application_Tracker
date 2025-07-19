@@ -53,14 +53,15 @@ export function AppSidebar() {
     <Sidebar variant="sidebar" collapsible="offcanvas" className="border-r-0 shadow-xl">
       {" "}
       {/* Explicitly set variant and collapsible */}
-      <SidebarHeader className="border-b px-6 py-6 bg-gradient-to-r from-blue-600 to-purple-600">
+      <SidebarHeader className="border-b px-6 py-6 bg-white dark:bg-gray-900">
         <div className="flex items-center space-x-3">
           <div className="relative">
-            <Briefcase className="h-8 w-8 text-white" />
+            <img 
+              src="/logo/logoJobflow.png" 
+              alt="JobFlow Logo" 
+              className="h-10 w-auto object-contain" 
+            />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-          </div>
-          <div>
-            <span className="text-xl font-bold text-white">JobTracker</span>
           </div>
         </div>
       </SidebarHeader>
