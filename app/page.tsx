@@ -114,12 +114,26 @@ export default function HomePage() {
           <div className="flex items-center justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center">
               <div className="flex -space-x-2 mr-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 border-2 border-white dark:border-gray-800"
-                  />
-                ))}
+                <img
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
+                  alt="User 1"
+                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
+                  alt="User 2"
+                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
+                  alt="User 3"
+                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
+                  alt="User 4"
+                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                />
               </div>
               <span>10,000+ job seekers</span>
             </div>
@@ -457,7 +471,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t mt-8 pt-8 text-center text-gray-600 dark:text-gray-400">
-            <p>&copy; 2024 JobTracker. Built with Next.js and ❤️</p>
+            <p>&copy;2025 JobFlow. Created by Rajat </p>
           </div>
         </div>
       </footer>
