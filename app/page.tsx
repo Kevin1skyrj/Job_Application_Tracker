@@ -8,10 +8,13 @@ import { Badge } from "@/components/ui/badge"
 import { Briefcase, BarChart3, Target, Users, Zap, ArrowRight, Star, Play } from "lucide-react"
 import { FeatureShowcase } from "@/components/feature-showcase"
 import { FeatureTour } from "@/components/feature-tour"
+import { useAuth, useUser } from '@clerk/nextjs'
 
 export default function HomePage() {
   const [showFeatures, setShowFeatures] = useState(false)
   const [showTour, setShowTour] = useState(false)
+  const { isSignedIn } = useAuth()
+  const { user } = useUser()
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
@@ -27,12 +30,21 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/dashboard">
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            {isSignedIn ? (
+              <Link href="/dashboard">
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+                  Go to Dashboard
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/sign-in">
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+                  Sign In
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </header>
@@ -56,15 +68,27 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link href="/dashboard">
-              <Button
-                size="lg"
-                className="px-8 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
-              >
-                Start Tracking Jobs
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+            {isSignedIn ? (
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  className="px-8 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                >
+                  Go to Dashboard
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/sign-up">
+                <Button
+                  size="lg"
+                  className="px-8 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                >
+                  Start Tracking Jobs
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            )}
             <div className="flex gap-3">
               <Button
                 variant="outline"
@@ -293,7 +317,7 @@ export default function HomePage() {
                 </Button>
                 <Link href="/dashboard" className="flex-1">
                   <Button variant="outline" className="w-full">
-                    Try Dashboard
+                    {isSignedIn ? "Go to Dashboard" : "Try Dashboard"}
                   </Button>
                 </Link>
               </div>
@@ -332,13 +356,22 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-20">
         <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-16 text-white">
           <h3 className="text-4xl font-bold mb-4">Ready to supercharge your job search?</h3>
-          <p className="text-xl mb-8 opacity-90">Join thousands of successful job seekers using JobTracker</p>
-          <Link href="/dashboard">
-            <Button size="lg" className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl">
-              Get Started Free Today
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+          <p className="text-xl mb-8 opacity-90">Join thousands of successful job seekers using JobFlow</p>
+          {isSignedIn ? (
+            <Link href="/dashboard">
+              <Button size="lg" className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl">
+                Go to Dashboard
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/sign-up">
+              <Button size="lg" className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl">
+                Get Started Free Today
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          )}
         </div>
       </section>
 

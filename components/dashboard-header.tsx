@@ -5,16 +5,17 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Bell, Search, User } from "lucide-react"
+import { Bell, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { RemindersDialog } from "@/components/reminders-dialog"
 import { useReminders } from "@/hooks/use-reminders"
+import { useUser, UserButton } from '@clerk/nextjs'
 
 export function DashboardHeader() {
   const { getReminderCount, getHighPriorityCount } = useReminders()
   const reminderCount = getReminderCount()
   const highPriorityCount = getHighPriorityCount()
+  const { user } = useUser()
 
   return (
     <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 shadow-sm">
@@ -95,13 +96,15 @@ export function DashboardHeader() {
 
           <Separator orientation="vertical" className="h-6" />
 
-          {/* User Avatar */}
-          <Avatar className="h-9 w-9 ring-2 ring-blue-100 dark:ring-blue-900">
-            <AvatarImage src="/placeholder.svg?height=36&width=36" alt="User" />
-            <AvatarFallback className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-              <User className="h-4 w-4" />
-            </AvatarFallback>
-          </Avatar>
+          {/* User Profile */}
+          <UserButton 
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: "w-9 h-9 ring-2 ring-blue-100 dark:ring-blue-900"
+              }
+            }}
+          />
         </div>
       </div>
     </header>
