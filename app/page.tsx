@@ -19,29 +19,29 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+        <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="relative">
               <img 
                 src="/logo/logoJobflow.png" 
                 alt="JobFlow Logo" 
-                className="h-10 w-auto object-contain -my-2" 
+                className="h-8 sm:h-10 w-auto object-contain" 
               />
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {isSignedIn ? (
               <Link href="/dashboard">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
-                  Go to Dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2">
+                  Dashboard
+                  <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </Link>
             ) : (
               <Link href="/sign-in">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2">
                   Sign In
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </Link>
             )}
@@ -50,59 +50,59 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
+      <section className="container mx-auto px-2 sm:px-4 py-10 sm:py-16 lg:py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <Badge variant="outline" className="mb-6 px-4 py-2 text-sm font-medium">
-            <Zap className="w-4 h-4 mr-2" />
+          <Badge variant="outline" className="mb-4 sm:mb-6 px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium">
+            <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             Smart Job Tracking
           </Badge>
 
-          <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight px-2">
             Track Your Job Applications
-            <span className="gradient-text block mt-2">Like a Professional</span>
+            <span className="gradient-text block mt-1 sm:mt-2">Like a Professional</span>
           </h1>
 
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-2 sm:px-4">
             Organize, manage, and optimize your job search with our intelligent Job Tracker board. Get insights, track
             progress, and land your dream job faster.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col gap-3 sm:gap-4 mb-8 sm:mb-12 px-2 sm:px-4">
             {isSignedIn ? (
-              <Link href="/dashboard">
+              <Link href="/dashboard" className="w-full sm:w-auto sm:mx-auto">
                 <Button
                   size="lg"
-                  className="px-8 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
                 >
                   Go to Dashboard
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
             ) : (
-              <Link href="/sign-up">
+              <Link href="/sign-up" className="w-full sm:w-auto sm:mx-auto">
                 <Button
                   size="lg"
-                  className="px-8 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
                 >
                   Start Tracking Jobs
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
             )}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-center">
               <Button
                 variant="outline"
                 size="lg"
-                className="px-6 py-4 text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
                 onClick={() => setShowTour(true)}
               >
-                <Play className="mr-2 h-5 w-5" />
+                <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 Take Tour
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="px-6 py-4 text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
                 onClick={() => setShowFeatures(true)}
               >
                 View Features
@@ -111,103 +111,103 @@ export default function HomePage() {
           </div>
 
           {/* Social Proof */}
-          <div className="flex items-center justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-2">
             <div className="flex items-center">
-              <div className="flex -space-x-2 mr-3">
+              <div className="flex -space-x-1 sm:-space-x-2 mr-2 sm:mr-3">
                 <img
                   src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
                   alt="User 1"
-                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
                   alt="User 2"
-                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
                   alt="User 3"
-                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80"
                   alt="User 4"
-                  className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-gray-800 object-cover"
                 />
               </div>
-              <span>10,000+ job seekers</span>
+              <span className="text-xs sm:text-sm">10,000+ job seekers</span>
             </div>
             <div className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-400 mr-1" />
-              <span>4.9/5 rating</span>
+              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mr-1" />
+              <span className="text-xs sm:text-sm">4.9/5 rating</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
+        <div className="text-center mb-12 sm:mb-16 px-2">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Everything you need to land your dream job
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
             Powerful features designed to streamline your job search and maximize your success rate
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0">
           <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto mb-4 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
-                <Target className="h-8 w-8 text-blue-600" />
+            <CardHeader className="text-center pb-3 sm:pb-4">
+              <div className="mx-auto mb-3 sm:mb-4 p-2 sm:p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
+                <Target className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
               </div>
-              <CardTitle className="text-xl">Job Tracker Board</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Job Tracker Board</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-base leading-relaxed">
+              <CardDescription className="text-sm sm:text-base leading-relaxed">
                 Visualize your entire job pipeline with intuitive drag-and-drop columns and smart automation
               </CardDescription>
             </CardContent>
           </Card>
 
           <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto mb-4 p-3 bg-green-100 dark:bg-green-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
-                <BarChart3 className="h-8 w-8 text-green-600" />
+            <CardHeader className="text-center pb-3 sm:pb-4">
+              <div className="mx-auto mb-3 sm:mb-4 p-2 sm:p-3 bg-green-100 dark:bg-green-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
+                <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
               </div>
-              <CardTitle className="text-xl">Advanced Analytics</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Advanced Analytics</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-base leading-relaxed">
+              <CardDescription className="text-sm sm:text-base leading-relaxed">
                 Track success rates, identify patterns, and optimize your job search strategy with detailed insights
               </CardDescription>
             </CardContent>
           </Card>
 
           <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto mb-4 p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
-                <Users className="h-8 w-8 text-purple-600" />
+            <CardHeader className="text-center pb-3 sm:pb-4">
+              <div className="mx-auto mb-3 sm:mb-4 p-2 sm:p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
               </div>
-              <CardTitle className="text-xl">Company Intelligence</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Company Intelligence</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-base leading-relaxed">
+              <CardDescription className="text-sm sm:text-base leading-relaxed">
                 Keep detailed company profiles, track interactions, and never miss important follow-ups
               </CardDescription>
             </CardContent>
           </Card>
 
           <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
-            <CardHeader className="text-center pb-4">
-              <div className="mx-auto mb-4 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
-                <Briefcase className="h-8 w-8 text-orange-600" />
+            <CardHeader className="text-center pb-3 sm:pb-4">
+              <div className="mx-auto mb-3 sm:mb-4 p-2 sm:p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl w-fit group-hover:scale-110 transition-transform">
+                <Briefcase className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600" />
               </div>
-              <CardTitle className="text-xl">Status Automation</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Status Automation</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-base leading-relaxed">
+              <CardDescription className="text-sm sm:text-base leading-relaxed">
                 Automatically organize applications by status with smart notifications and reminders
               </CardDescription>
             </CardContent>
@@ -216,30 +216,30 @@ export default function HomePage() {
       </section>
 
       {/* Interactive Preview Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 lg:p-12">
-        <div className="text-center mb-12">
-          <Badge variant="outline" className="mb-4">
-            <Play className="w-4 h-4 mr-2" />
+      <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <Badge variant="outline" className="mb-3 sm:mb-4">
+            <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             Live Preview
           </Badge>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             See JobTracker in Action
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
             Get a glimpse of your future dashboard and experience the power of organized job tracking
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
           {/* Mini Dashboard Preview */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 border">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold">Your Job Pipeline</h3>
-              <Badge variant="secondary">Live Demo</Badge>
+          <div className="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-xl p-4 sm:p-6 border order-2 lg:order-1">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-semibold">Your Job Pipeline</h3>
+              <Badge variant="secondary" className="text-xs">Live Demo</Badge>
             </div>
             
-            <div className="grid grid-cols-4 gap-3 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
               {[
                 { name: "Applied", count: 12, color: "bg-blue-100 text-blue-700" },
                 { name: "Interview", count: 4, color: "bg-yellow-100 text-yellow-700" },
@@ -247,7 +247,7 @@ export default function HomePage() {
                 { name: "Rejected", count: 3, color: "bg-red-100 text-red-700" }
               ].map((status) => (
                 <div key={status.name} className="text-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 ${status.color} font-bold text-lg`}>
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2 ${status.color} font-bold text-sm sm:text-base lg:text-lg`}>
                     {status.count}
                   </div>
                   <div className="text-xs text-muted-foreground">{status.name}</div>
@@ -255,20 +255,20 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="space-y-3">
-              <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-medium text-sm">Senior React Developer</div>
+                    <div className="font-medium text-xs sm:text-sm">Senior React Developer</div>
                     <div className="text-xs text-muted-foreground">TechCorp Inc. • ₹15L-18L</div>
                   </div>
                   <Badge className="bg-yellow-100 text-yellow-700 text-xs">Interview</Badge>
                 </div>
               </div>
-              <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-medium text-sm">Full Stack Engineer</div>
+                    <div className="font-medium text-xs sm:text-sm">Full Stack Engineer</div>
                     <div className="text-xs text-muted-foreground">StartupXYZ • ₹12L-15L</div>
                   </div>
                   <Badge className="bg-blue-100 text-blue-700 text-xs">Applied</Badge>
@@ -278,59 +278,59 @@ export default function HomePage() {
           </div>
 
           {/* Call to Action */}
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-600" />
+          <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-3 p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
                 </div>
                 <div>
-                  <div className="font-medium">Organize Everything</div>
-                  <div className="text-sm text-muted-foreground">Drag-and-drop simplicity</div>
+                  <div className="font-medium text-sm sm:text-base">Organize Everything</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Drag-and-drop simplicity</div>
                 </div>
               </div>
               
-              <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                  <BarChart3 className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                 </div>
                 <div>
-                  <div className="font-medium">Track Progress</div>
-                  <div className="text-sm text-muted-foreground">Smart analytics & insights</div>
+                  <div className="font-medium text-sm sm:text-base">Track Progress</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Smart analytics & insights</div>
                 </div>
               </div>
               
-              <div className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                  <Zap className="h-5 w-5 text-purple-600" />
+              <div className="flex items-center gap-3 p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
                 </div>
                 <div>
-                  <div className="font-medium">Stay Motivated</div>
-                  <div className="text-sm text-muted-foreground">Goals & reminders</div>
+                  <div className="font-medium text-sm sm:text-base">Stay Motivated</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Goals & reminders</div>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <Button
                 size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base py-3 sm:py-4"
                 onClick={() => setShowTour(true)}
               >
-                <Play className="mr-2 h-5 w-5" />
+                <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 Start Interactive Tour
               </Button>
               
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Button
                   variant="outline"
-                  className="flex-1"
+                  className="flex-1 text-sm sm:text-base py-2 sm:py-3"
                   onClick={() => setShowFeatures(true)}
                 >
                   Explore Features
                 </Button>
                 <Link href="/dashboard" className="flex-1">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full text-sm sm:text-base py-2 sm:py-3">
                     {isSignedIn ? "Go to Dashboard" : "Try Dashboard"}
                   </Button>
                 </Link>
@@ -342,47 +342,47 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Trusted by job seekers worldwide</h3>
+      <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
+        <div className="text-center mb-8 sm:mb-12 px-2">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Trusted by job seekers worldwide</h3>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0">
           <div className="text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
-            <p className="text-gray-600 dark:text-gray-400">Active Users</p>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">10K+</div>
+            <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400">Active Users</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-green-600 mb-2">50K+</div>
-            <p className="text-gray-600 dark:text-gray-400">Jobs Tracked</p>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mb-1 sm:mb-2">50K+</div>
+            <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400">Jobs Tracked</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-purple-600 mb-2">85%</div>
-            <p className="text-gray-600 dark:text-gray-400">Success Rate</p>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 mb-1 sm:mb-2">85%</div>
+            <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400">Success Rate</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-2">4.9★</div>
-            <p className="text-gray-600 dark:text-gray-400">User Rating</p>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-600 mb-1 sm:mb-2">4.9★</div>
+            <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400">User Rating</p>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-16 text-white">
-          <h3 className="text-4xl font-bold mb-4">Ready to supercharge your job search?</h3>
-          <p className="text-xl mb-8 opacity-90">Join thousands of successful job seekers using JobFlow</p>
+      <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
+        <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 lg:p-16 text-white mx-2 sm:mx-0">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Ready to supercharge your job search?</h3>
+          <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90">Join thousands of successful job seekers using JobFlow</p>
           {isSignedIn ? (
             <Link href="/dashboard">
-              <Button size="lg" className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl">
+              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl w-full sm:w-auto">
                 Go to Dashboard
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </Link>
           ) : (
             <Link href="/sign-up">
-              <Button size="lg" className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl">
+              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl w-full sm:w-auto">
                 Get Started Free Today
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </Link>
           )}
@@ -390,25 +390,25 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2">
+      <footer className="border-t bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 py-8 sm:py-12">
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start space-x-2 mb-3 sm:mb-4">
                 <img 
                   src="/logo/logoJobflow.png" 
                   alt="JobFlow Logo" 
-                  className="h-10 w-auto object-contain" 
+                  className="h-8 sm:h-10 w-auto object-contain" 
                 />
               </div>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-2 sm:px-0">
                 The smartest way to track and manage your job applications.
               </p>
             </div>
 
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+            <div className="text-center sm:text-left">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Product</h4>
+              <ul className="space-y-1 sm:space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-blue-600">
                     Features
@@ -427,9 +427,9 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+            <div className="text-center sm:text-left">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Support</h4>
+              <ul className="space-y-1 sm:space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-blue-600">
                     Help Center
@@ -448,9 +448,9 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+            <div className="text-center sm:text-left">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Company</h4>
+              <ul className="space-y-1 sm:space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-blue-600">
                     About
@@ -470,7 +470,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="border-t mt-8 pt-8 text-center text-gray-600 dark:text-gray-400">
+          <div className="border-t mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
             <p>&copy;2025 JobFlow. Created by Rajat </p>
           </div>
         </div>
