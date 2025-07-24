@@ -17,7 +17,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AddJobDialog } from "@/components/add-job-dialog"
 import { SetGoalDialog } from "@/components/set-goal-dialog"
-import { useNavigation } from "@/components/navigation-provider"
 
 const menuItems = [
   {
@@ -47,7 +46,6 @@ const quickActions = [
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const { navigateWithLoader, isLoading } = useNavigation()
 
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas" className="border-r-0 shadow-xl">
@@ -75,14 +73,14 @@ export function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
+                    asChild
                     isActive={pathname === item.url}
-                    className={`h-11 px-4 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 cursor-pointer ${
-                      isLoading ? 'opacity-50 pointer-events-none' : ''
-                    }`}
-                    onClick={() => navigateWithLoader(item.url)}
+                    className="h-11 px-4 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
                   >
-                    <item.icon className="h-5 w-5 mr-3" />
-                    <span className="font-medium">{item.title}</span>
+                    <Link href={item.url}>
+                      <item.icon className="h-5 w-5 mr-3" />
+                      <span className="font-medium">{item.title}</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

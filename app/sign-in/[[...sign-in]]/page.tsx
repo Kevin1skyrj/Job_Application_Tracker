@@ -2,18 +2,26 @@
 
 import { SignIn } from '@clerk/nextjs'
 import { useAuth } from '@clerk/nextjs'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Page() {
   const { isSignedIn, isLoaded } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [hasRedirected, setHasRedirected] = useState(false)
 
   useEffect(() => {
-    if (isLoaded && isSignedIn) {
-      router.push('/dashboard')
+    if (isLoaded && isSignedIn && !hasRedirected) {
+      setHasRedirected(true)
+      const redirectUrl = searchParams.get('redirect_url') || '/dashboard'
+      
+      // Use replace to avoid back button issues
+      setTimeout(() => {
+        router.replace(redirectUrl)
+      }, 100)
     }
-  }, [isLoaded, isSignedIn, router])
+  }, [isLoaded, isSignedIn, router, searchParams, hasRedirected])
 
   // If user is already signed in, show loading while redirecting
   if (isLoaded && isSignedIn) {
@@ -25,13 +33,16 @@ export default function Page() {
             alt="JobFlow Logo" 
             className="h-16 w-auto object-contain mx-auto mb-4 animate-pulse" 
           />
-          <div className="text-xl font-semibold gradient-text mb-2">Welcome! Redirecting to Dashboard...</div>
-          <div className="text-gray-600 dark:text-gray-400 mb-4">Please wait while we redirect you</div>
+          <div className="text-xl font-semibold gradient-text mb-2">You're already signed in!</div>
+          <div className="text-gray-600 dark:text-gray-400 mb-4">Taking you back...</div>
           <button 
-            onClick={() => router.push('/dashboard')}
+            onClick={() => {
+              const redirectUrl = searchParams.get('redirect_url') || '/dashboard'
+              router.replace(redirectUrl)
+            }}
             className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all"
           >
-            Go to Dashboard Manually
+            Go Now
           </button>
         </div>
       </div>
@@ -54,8 +65,8 @@ export default function Page() {
           path="/sign-in"
           routing="path"
           signUpUrl="/sign-up"
-          afterSignInUrl="/dashboard"
-          redirectUrl="/dashboard"
+          afterSignInUrl={searchParams.get('redirect_url') || '/dashboard'}
+          redirectUrl={searchParams.get('redirect_url') || '/dashboard'}
         />
       </div>
     </div>
