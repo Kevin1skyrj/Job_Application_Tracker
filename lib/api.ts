@@ -30,10 +30,19 @@ class ApiService {
       const response = await fetch(url, config)
       
       if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText}`)
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
       }
 
-      return await response.json()
+      const data = await response.json()
+      
+      // Backend returns { success: true, data: ... }, extract the data
+      if (data.success && data.data !== undefined) {
+        return data.data
+      }
+      
+      // Fallback for different response formats
+      return data
     } catch (error) {
       // Check if it's a network error (backend not running)
       if (error instanceof TypeError && error.message === 'Failed to fetch') {

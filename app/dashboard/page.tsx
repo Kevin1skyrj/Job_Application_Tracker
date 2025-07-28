@@ -4,6 +4,7 @@ import { JobBoard } from "@/components/job-board"
 import { JobStats } from "@/components/job-stats"
 import { QuickActions } from "@/components/quick-actions"
 import { GoalProgressIndicator } from "@/components/goal-progress-indicator"
+// import { NetworkStatus } from "@/components/network-status" // Removed for now
 import { useUser, useAuth } from '@clerk/nextjs'
 
 export default function DashboardPage() {
@@ -53,6 +54,7 @@ export default function DashboardPage() {
       <GoalProgressIndicator />
       <JobStats />
       <JobBoard />
+      {/* <NetworkStatus /> */}
     </div>
   )
 }
