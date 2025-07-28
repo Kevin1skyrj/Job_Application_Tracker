@@ -23,3 +23,24 @@ export interface JobFormData {
   jobUrl?: string
   appliedDate: Date
 }
+
+// API Response Types
+export interface ApiResponse<T> {
+  success: boolean
+  data: T
+  message?: string
+}
+
+export interface JobStats {
+  total: number
+  applied: number
+  interviewing: number
+  offers: number
+  rejected: number
+}
+
+export interface ApiError {
+  error: string
+  message: string
+  statusCode: number
+}

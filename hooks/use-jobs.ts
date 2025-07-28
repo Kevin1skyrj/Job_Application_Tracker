@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react"
 import type { Job } from "@/types/job"
 import { useToast } from "@/hooks/use-toast"
+// API service ready for when backend is implemented
+// import { useAuth } from "@clerk/nextjs"
+// import { apiService } from "@/lib/api"
 
-// Pure frontend mock data - no backend needed
+// Fallback mock data for development/offline mode
 const mockJobs: Job[] = [
   {
     _id: "1",
@@ -79,7 +82,7 @@ const mockJobs: Job[] = [
 
 const STORAGE_KEY = "job-tracker-jobs"
 
-// Load jobs from localStorage or return mock data
+// Load jobs from localStorage (fallback for offline mode)
 const loadJobsFromStorage = (): Job[] => {
   if (typeof window === "undefined") return mockJobs
 
@@ -98,12 +101,10 @@ const loadJobsFromStorage = (): Job[] => {
     console.error("Error loading jobs from storage:", error)
   }
 
-  // If no stored data, save mock data and return it
-  saveJobsToStorage(mockJobs)
   return mockJobs
 }
 
-// Save jobs to localStorage
+// Save jobs to localStorage (cache for offline mode)
 const saveJobsToStorage = (jobs: Job[]) => {
   if (typeof window === "undefined") return
 
@@ -116,25 +117,63 @@ const saveJobsToStorage = (jobs: Job[]) => {
 
 export function useJobs() {
   const { toast } = useToast()
+  // const { getToken, isSignedIn } = useAuth() // TODO: Enable when backend is ready
   const [jobs, setJobs] = useState<Job[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  // const [isOnline, setIsOnline] = useState(true) // TODO: Enable when backend is ready
 
   // Load jobs on mount
   useEffect(() => {
-    const loadedJobs = loadJobsFromStorage()
-    setJobs(loadedJobs)
-    setIsLoading(false)
-  }, [])
+    loadJobs()
+  }, []) // Removed isSignedIn dependency for demo mode
 
-  // Save jobs whenever they change
+  // Save jobs whenever they change (for demo persistence)
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && jobs.length > 0) {
       saveJobsToStorage(jobs)
     }
   }, [jobs, isLoading])
 
+  const loadJobs = async () => {
+    setIsLoading(true)
+    
+    try {
+      // For now, just use localStorage/mock data until backend is ready
+      const cachedJobs = loadJobsFromStorage()
+      setJobs(cachedJobs)
+      
+      /* 
+      TODO: Enable when backend is ready
+      
+      if (!isSignedIn) {
+        const cachedJobs = loadJobsFromStorage()
+        setJobs(cachedJobs)
+        setIsLoading(false)
+        return
+      }
+
+      const token = await getToken()
+      if (!token) {
+        throw new Error('No authentication token')
+      }
+
+      const apiJobs = await apiService.getJobs(token)
+      setJobs(apiJobs)
+      saveJobsToStorage(apiJobs)
+      */
+      
+    } catch (error) {
+      console.error('Failed to load jobs:', error)
+      const cachedJobs = loadJobsFromStorage()
+      setJobs(cachedJobs)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const addJob = async (jobData: Omit<Job, "_id" | "createdAt" | "updatedAt">) => {
     try {
+      // For now, work with localStorage until backend is ready
       const newJob: Job = {
         ...jobData,
         _id: Math.random().toString(36).substr(2, 9),
@@ -150,6 +189,39 @@ export function useJobs() {
       })
 
       return newJob
+
+      /*
+      TODO: Enable when backend is ready
+      
+      if (!isSignedIn) {
+        throw new Error('Not authenticated')
+      }
+
+      const token = await getToken()
+      if (!token) {
+        throw new Error('No authentication token')
+      }
+
+      // Optimistic update
+      const tempJob: Job = {
+        ...jobData,
+        _id: `temp-${Date.now()}`,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+      setJobs(prev => [...prev, tempJob])
+
+      if (isOnline) {
+        const newJob = await apiService.createJob(jobData as JobFormData, token)
+        
+        // Replace temp job with real job
+        setJobs(prev => prev.map(job => 
+          job._id === tempJob._id ? newJob : job
+        ))
+        saveJobsToStorage([...jobs.filter(j => j._id !== tempJob._id), newJob])
+      }
+      */
+      
     } catch (error) {
       toast({
         title: "Error",
@@ -162,6 +234,7 @@ export function useJobs() {
 
   const updateJob = async (jobId: string, updates: Partial<Job>) => {
     try {
+      // For now, work with localStorage until backend is ready
       const updatedJob = {
         ...updates,
         updatedAt: new Date(),
@@ -179,6 +252,36 @@ export function useJobs() {
       })
 
       return updatedJob as Job
+
+      /*
+      TODO: Enable when backend is ready
+      
+      if (!isSignedIn) {
+        throw new Error('Not authenticated')
+      }
+
+      const token = await getToken()
+      if (!token) {
+        throw new Error('No authentication token')
+      }
+
+      // Optimistic update
+      const updatedJob = {
+        ...updates,
+        updatedAt: new Date(),
+      }
+
+      setJobs(prev =>
+        prev.map(job =>
+          job._id === jobId ? { ...job, ...updatedJob } : job
+        )
+      )
+
+      if (isOnline) {
+        await apiService.updateJob(jobId, updates, token)
+      }
+      */
+
     } catch (error) {
       toast({
         title: "Error",
@@ -191,12 +294,35 @@ export function useJobs() {
 
   const deleteJob = async (jobId: string) => {
     try {
+      // For now, work with localStorage until backend is ready
       setJobs(prev => prev.filter(job => job._id !== jobId))
 
       toast({
         title: "Job Deleted",
         description: "Job application deleted successfully",
       })
+
+      /*
+      TODO: Enable when backend is ready
+      
+      if (!isSignedIn) {
+        throw new Error('Not authenticated')
+      }
+
+      const token = await getToken()
+      if (!token) {
+        throw new Error('No authentication token')
+      }
+
+      // Optimistic update
+      const deletedJob = jobs.find(job => job._id === jobId)
+      setJobs(prev => prev.filter(job => job._id !== jobId))
+
+      if (isOnline) {
+        await apiService.deleteJob(jobId, token)
+      }
+      */
+
     } catch (error) {
       toast({
         title: "Error",
@@ -237,5 +363,6 @@ export function useJobs() {
     deleteJob,
     getJobsByStatus,
     getJobStats,
+    refreshJobs: loadJobs,
   }
 }
