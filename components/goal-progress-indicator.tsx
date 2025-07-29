@@ -3,13 +3,13 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 import { useGoals } from "@/hooks/use-goals"
 import { SetGoalDialog } from "@/components/set-goal-dialog"
 import { Target, TrendingUp, Calendar } from "lucide-react"
 
 export function GoalProgressIndicator() {
-  const { jobs } = useJobs()
+  const { jobs } = useJobsContext()
   const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals()
 
   // Calculate current month applications

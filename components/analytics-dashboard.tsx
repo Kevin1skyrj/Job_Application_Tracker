@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts"
 import { TrendingUp, TrendingDown, Target, Calendar, Award, Zap } from "lucide-react"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 import { useGoals } from "@/hooks/use-goals"
 
 // Mock data - replace with real data from your backend
@@ -33,7 +33,7 @@ const companyTypes = [
 ]
 
 export function AnalyticsDashboard() {
-  const { jobs } = useJobs()
+  const { jobs } = useJobsContext()
   const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals()
 
   // Calculate current month applications

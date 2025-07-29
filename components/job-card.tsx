@@ -20,7 +20,7 @@ import { formatDistanceToNow } from "date-fns"
 import { EditJobDialog } from "@/components/edit-job-dialog"
 import { JobDetailsDialog } from "@/components/job-details-dialog"
 import { useState } from "react"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 
 interface JobCardProps {
   job: Job
@@ -29,7 +29,7 @@ interface JobCardProps {
 export function JobCard({ job }: JobCardProps) {
   const [showEditDialog, setShowEditDialog] = useState(false)
   const [showDetailsDialog, setShowDetailsDialog] = useState(false)
-  const { deleteJob } = useJobs()
+  const { deleteJob } = useJobsContext()
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this job application?")) {

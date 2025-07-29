@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import type { Job } from "@/types/job"
 import { useToast } from "@/hooks/use-toast"
+import { useDebounce } from "@/hooks/use-debounce"
 // API service now enabled for backend integration
 import { useAuth } from "@clerk/nextjs"
 import { apiService } from "@/lib/api"
@@ -120,20 +121,16 @@ export function useJobs() {
   const { getToken, isSignedIn } = useAuth()
   const [jobs, setJobs] = useState<Job[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [hasInitialized, setHasInitialized] = useState(false)
 
-  // Load jobs on mount
-  useEffect(() => {
-    loadJobs()
-  }, [isSignedIn])
-
-  // Save jobs whenever they change (for offline cache)
-  useEffect(() => {
-    if (!isLoading && jobs.length > 0) {
-      saveJobsToStorage(jobs)
+  // Memoize loadJobs function to prevent infinite re-renders
+  const loadJobs = useCallback(async () => {
+    // Only run once per session unless explicitly called
+    if (hasInitialized && isLoading === false) {
+      console.log('🔄 Jobs already loaded, skipping duplicate request')
+      return
     }
-  }, [jobs, isLoading])
 
-  const loadJobs = async () => {
     setIsLoading(true)
     
     try {
@@ -184,10 +181,25 @@ export function useJobs() {
       setJobs(cachedJobs)
     } finally {
       setIsLoading(false)
+      setHasInitialized(true)
     }
-  }
+  }, [getToken, isSignedIn, toast, hasInitialized, isLoading])
 
-  const addJob = async (jobData: Omit<Job, "_id" | "createdAt" | "updatedAt">) => {
+  // Load jobs only once on mount when user is signed in
+  useEffect(() => {
+    if (isSignedIn && !hasInitialized) {
+      loadJobs()
+    }
+  }, [isSignedIn, hasInitialized, loadJobs])
+
+  // Save jobs whenever they change (for offline cache)
+  useEffect(() => {
+    if (!isLoading && jobs.length > 0) {
+      saveJobsToStorage(jobs)
+    }
+  }, [jobs, isLoading])
+
+  const addJob = useCallback(async (jobData: Omit<Job, "_id" | "createdAt" | "updatedAt">) => {
     try {
       // Check authentication
       if (!isSignedIn) {
@@ -252,9 +264,9 @@ export function useJobs() {
       })
       throw error
     }
-  }
+  }, [getToken, isSignedIn, jobs, toast])
 
-  const updateJob = async (jobId: string, updates: Partial<Job>) => {
+  const updateJob = useCallback(async (jobId: string, updates: Partial<Job>) => {
     try {
       // Check authentication
       if (!isSignedIn) {
@@ -314,9 +326,9 @@ export function useJobs() {
       })
       throw error
     }
-  }
+  }, [getToken, isSignedIn, toast])
 
-  const deleteJob = async (jobId: string) => {
+  const deleteJob = useCallback(async (jobId: string) => {
     try {
       // Check authentication
       if (!isSignedIn) {
@@ -359,15 +371,15 @@ export function useJobs() {
       })
       throw error
     }
-  }
+  }, [getToken, isSignedIn, jobs, toast])
 
   // Get jobs by status
-  const getJobsByStatus = (status: Job["status"]) => {
+  const getJobsByStatus = useCallback((status: Job["status"]) => {
     return jobs.filter(job => job.status === status)
-  }
+  }, [jobs])
 
   // Get job statistics
-  const getJobStats = () => {
+  const getJobStats = useCallback(() => {
     const total = jobs.length
     const applied = jobs.filter(job => job.status === "applied").length
     const interviewing = jobs.filter(job => job.status === "interviewing").length
@@ -381,7 +393,14 @@ export function useJobs() {
       offers,
       rejected,
     }
-  }
+  }, [jobs])
+
+  // Manual refresh function that bypasses initialization check
+  const refreshJobs = useCallback(async () => {
+    console.log('🔄 Manual refresh triggered')
+    setHasInitialized(false) // Reset to allow fresh fetch
+    await loadJobs()
+  }, [loadJobs])
 
   return {
     jobs,
@@ -391,6 +410,6 @@ export function useJobs() {
     deleteJob,
     getJobsByStatus,
     getJobStats,
-    refreshJobs: loadJobs,
+    refreshJobs,
   }
 }

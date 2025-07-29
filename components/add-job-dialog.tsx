@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
+import { useUser } from "@clerk/nextjs"
 import type { Job } from "@/types/job"
 import { Building2, MapPin, IndianRupee, Link, FileText } from "lucide-react"
 
@@ -19,7 +20,8 @@ interface AddJobDialogProps {
 export function AddJobDialog({ children }: AddJobDialogProps) {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { addJob } = useJobs()
+  const { addJob } = useJobsContext()
+  const { user } = useUser()
 
   const [formData, setFormData] = useState({
     title: "",
@@ -38,6 +40,7 @@ export function AddJobDialog({ children }: AddJobDialogProps) {
     try {
       await addJob({
         ...formData,
+        userId: user?.id || '',
         appliedDate: new Date(),
       })
 

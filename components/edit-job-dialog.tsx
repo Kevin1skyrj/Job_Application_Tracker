@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 import type { Job } from "@/types/job"
 import { Building2, MapPin, IndianRupee, Link, FileText } from "lucide-react"
 
@@ -20,7 +20,7 @@ interface EditJobDialogProps {
 
 export function EditJobDialog({ job, open, onOpenChange }: EditJobDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const { updateJob } = useJobs()
+  const { updateJob } = useJobsContext()
 
   const [formData, setFormData] = useState({
     title: job.title,

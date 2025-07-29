@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Search, Plus, SortAsc } from "lucide-react"
 import { AddJobDialog } from "@/components/add-job-dialog"
 import { JobCard } from "@/components/job-card"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 import type { Job } from "@/types/job"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
@@ -49,7 +49,7 @@ const columns = [
 ]
 
 export function JobBoard() {
-  const { jobs, updateJob, isLoading } = useJobs()
+  const { jobs, updateJob, isLoading } = useJobsContext()
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("date")
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([])

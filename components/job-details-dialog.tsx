@@ -33,7 +33,7 @@ import {
 import type { Job } from "@/types/job"
 import { formatDistanceToNow, format } from "date-fns"
 import { EditJobDialog } from "@/components/edit-job-dialog"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 
 interface JobDetailsDialogProps {
   job: Job | null
@@ -43,7 +43,7 @@ interface JobDetailsDialogProps {
 
 export function JobDetailsDialog({ job, open, onOpenChange }: JobDetailsDialogProps) {
   const [showEditDialog, setShowEditDialog] = useState(false)
-  const { deleteJob, updateJob } = useJobs()
+  const { deleteJob, updateJob } = useJobsContext()
 
   if (!job) return null
 

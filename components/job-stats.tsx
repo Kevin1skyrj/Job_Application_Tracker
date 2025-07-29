@@ -3,10 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, Clock, CheckCircle, TrendingUp } from "lucide-react"
-import { useJobs } from "@/hooks/use-jobs"
+import { useJobsContext } from "@/contexts/jobs-context"
 
 export function JobStats() {
-  const { jobs } = useJobs()
+  const { jobs } = useJobsContext()
 
   const stats = {
     total: jobs?.length || 0,
