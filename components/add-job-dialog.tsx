@@ -200,7 +200,7 @@ export function AddJobDialog({ children }: AddJobDialogProps) {
               id="notes"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              placeholder="Add any notes about this application, interview details, contacts, etc."
+              placeholder=" Add any notes about this application, interview details, contacts, etc."
               rows={4}
               className="resize-none"
             />
