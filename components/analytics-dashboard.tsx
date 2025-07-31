@@ -8,44 +8,117 @@ import { TrendingUp, TrendingDown, Target, Calendar, Award, Zap } from "lucide-r
 import { useJobsContext } from "@/contexts/jobs-context"
 import { useGoals } from "@/hooks/use-goals"
 
-// Mock data - replace with real data from your backend
-const applicationTrends = [
-  { month: "Jan", applications: 12, interviews: 3, offers: 1 },
-  { month: "Feb", applications: 18, interviews: 5, offers: 2 },
-  { month: "Mar", applications: 15, interviews: 4, offers: 1 },
-  { month: "Apr", applications: 22, interviews: 7, offers: 3 },
-  { month: "May", applications: 28, interviews: 9, offers: 2 },
-  { month: "Jun", applications: 25, interviews: 8, offers: 4 },
-]
+// Utility: Get last 6 months labels
+function getLast6Months() {
+  const months = [];
+  const now = new Date();
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push(d.toLocaleString('default', { month: 'short' }));
+  }
+  return months;
+}
 
-const statusDistribution = [
-  { name: "Applied", value: 45, color: "#3b82f6" },
-  { name: "Interviewing", value: 12, color: "#eab308" },
-  { name: "Offers", value: 8, color: "#22c55e" },
-  { name: "Rejected", value: 23, color: "#ef4444" },
-]
+// Utility: Calculate average response time (in days)
+function getAvgResponseTime(jobs) {
+  const responded = jobs.filter(j => j.responseDate && j.appliedDate);
+  if (responded.length === 0) return '--';
+  const total = responded.reduce((sum, j) => sum + (new Date(j.responseDate) - new Date(j.appliedDate)), 0);
+  return (total / responded.length / (1000 * 60 * 60 * 24)).toFixed(1) + ' days';
+}
 
-const companyTypes = [
-  { type: "Startup", count: 25, avgResponse: "3 days" },
-  { type: "Mid-size", count: 18, avgResponse: "5 days" },
-  { type: "Enterprise", count: 12, avgResponse: "7 days" },
-  { type: "Agency", count: 8, avgResponse: "4 days" },
-]
+// Utility: Calculate interview rate
+function getInterviewRate(jobs) {
+  if (!jobs.length) return '--';
+  const interviewed = jobs.filter(j => j.status === 'interviewing' || j.status === 'offer');
+  return Math.round((interviewed.length / jobs.length) * 100) + '%';
+}
+
+// Utility: Calculate offer rate
+function getOfferRate(jobs) {
+  if (!jobs.length) return '--';
+  const offers = jobs.filter(j => j.status === 'offer');
+  return Math.round((offers.length / jobs.length) * 100) + '%';
+}
+
+// Utility: Status distribution
+function getStatusDistribution(jobs) {
+  const statusMap = {
+    Applied: { name: 'Applied', value: 0, color: '#3b82f6' },
+    Interviewing: { name: 'Interviewing', value: 0, color: '#eab308' },
+    Offers: { name: 'Offers', value: 0, color: '#22c55e' },
+    Rejected: { name: 'Rejected', value: 0, color: '#ef4444' },
+  };
+  jobs.forEach(j => {
+    if (j.status === 'applied') statusMap.Applied.value++;
+    else if (j.status === 'interviewing') statusMap.Interviewing.value++;
+    else if (j.status === 'offer') statusMap.Offers.value++;
+    else if (j.status === 'rejected') statusMap.Rejected.value++;
+  });
+  return Object.values(statusMap);
+}
+
+// Utility: Application trends (last 6 months)
+function getApplicationTrends(jobs) {
+  const months = getLast6Months();
+  const trends = months.map((month, idx) => {
+    // Get the year/month for this slot
+    const d = new Date();
+    d.setMonth(d.getMonth() - (5 - idx));
+    const year = d.getFullYear();
+    const m = d.getMonth();
+    // Filter jobs for this month
+    const jobsInMonth = jobs.filter(j => {
+      const applied = new Date(j.appliedDate);
+      return applied.getMonth() === m && applied.getFullYear() === year;
+    });
+    return {
+      month,
+      applications: jobsInMonth.length,
+      interviews: jobsInMonth.filter(j => j.status === 'interviewing' || j.status === 'offer').length,
+      offers: jobsInMonth.filter(j => j.status === 'offer').length,
+    };
+  });
+  return trends;
+}
+
+// Utility: Company type analysis (example based on job.companyType)
+function getCompanyTypes(jobs) {
+  // You may need to adjust this if your job objects have a different structure
+  const types = ['Startup', 'Mid-size', 'Enterprise', 'Agency'];
+  return types.map(type => {
+    const jobsOfType = jobs.filter(j => j.companyType === type);
+    return {
+      type,
+      count: jobsOfType.length,
+      avgResponse: getAvgResponseTime(jobsOfType),
+    };
+  });
+}
 
 export function AnalyticsDashboard() {
-  const { jobs } = useJobsContext()
-  const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals()
+  const { jobs = [] } = useJobsContext();
+  const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals();
 
   // Calculate current month applications
-  const currentMonth = new Date().getMonth()
-  const currentYear = new Date().getFullYear()
-  const jobsThisMonth = jobs?.filter(job => {
-    const jobDate = new Date(job.appliedDate)
-    return jobDate.getMonth() === currentMonth && jobDate.getFullYear() === currentYear
-  }).length || 0
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  const jobsThisMonth = jobs.filter(job => {
+    const jobDate = new Date(job.appliedDate);
+    return jobDate.getMonth() === currentMonth && jobDate.getFullYear() === currentYear;
+  }).length;
 
-  const currentGoal = getCurrentMonthGoal()
-  const progress = calculateMonthlyProgress(jobsThisMonth)
+  const currentGoal = getCurrentMonthGoal();
+  const progress = calculateMonthlyProgress(jobsThisMonth);
+
+  // Analytics derived from jobs
+  const avgResponseTime = getAvgResponseTime(jobs);
+  const interviewRate = getInterviewRate(jobs);
+  const offerRate = getOfferRate(jobs);
+  const statusDistribution = getStatusDistribution(jobs);
+  const applicationTrends = getApplicationTrends(jobs);
+  const companyTypes = getCompanyTypes(jobs);
+
   return (
     <div className="space-y-8">
       {/* Key Metrics */}
@@ -56,11 +129,8 @@ export function AnalyticsDashboard() {
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4.2 days</div>
-            <div className="flex items-center text-xs text-green-600">
-              <TrendingDown className="h-3 w-3 mr-1" />
-              12% faster than last month
-            </div>
+            <div className="text-2xl font-bold">{avgResponseTime}</div>
+            {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
@@ -70,11 +140,8 @@ export function AnalyticsDashboard() {
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">32%</div>
-            <div className="flex items-center text-xs text-green-600">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              8% higher than average
-            </div>
+            <div className="text-2xl font-bold">{interviewRate}</div>
+            {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
@@ -84,11 +151,8 @@ export function AnalyticsDashboard() {
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">18%</div>
-            <div className="flex items-center text-xs text-blue-600">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              Industry average: 15%
-            </div>
+            <div className="text-2xl font-bold">{offerRate}</div>
+            {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
