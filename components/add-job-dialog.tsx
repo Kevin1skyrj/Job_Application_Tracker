@@ -207,6 +207,7 @@ export function AddJobDialog({ children }: AddJobDialogProps) {
           </div>
 
           {/* Action Buttons */}
+          
           <div className="flex justify-end space-x-3 pt-4 border-t">
             <Button type="button" variant="outline" onClick={() => setOpen(false)} className="px-6">
               Cancel
