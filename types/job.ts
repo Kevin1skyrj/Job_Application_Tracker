@@ -7,6 +7,7 @@ export interface Job {
   salary?: string
   status: "applied" | "interviewing" | "offer" | "rejected"
   appliedDate: Date
+  responseDate?: Date // Date when a response was received (for analytics)
   notes?: string
   jobUrl?: string
   createdAt: Date

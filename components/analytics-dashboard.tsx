@@ -19,37 +19,43 @@ function getLast6Months() {
   return months;
 }
 
+import type { Job } from "@/types/job";
+
 // Utility: Calculate average response time (in days)
-function getAvgResponseTime(jobs) {
-  const responded = jobs.filter(j => j.responseDate && j.appliedDate);
+function getAvgResponseTime(jobs: Job[]): string {
+  const responded = jobs.filter((j: Job) => j.responseDate && j.appliedDate);
   if (responded.length === 0) return '--';
-  const total = responded.reduce((sum, j) => sum + (new Date(j.responseDate) - new Date(j.appliedDate)), 0);
+  const total = responded.reduce((sum: number, j: Job) => {
+    const responseDate = j.responseDate instanceof Date ? j.responseDate : new Date(j.responseDate as any);
+    const appliedDate = j.appliedDate instanceof Date ? j.appliedDate : new Date(j.appliedDate as any);
+    return sum + (responseDate.getTime() - appliedDate.getTime());
+  }, 0);
   return (total / responded.length / (1000 * 60 * 60 * 24)).toFixed(1) + ' days';
 }
 
 // Utility: Calculate interview rate
-function getInterviewRate(jobs) {
+function getInterviewRate(jobs: Job[]): string {
   if (!jobs.length) return '--';
-  const interviewed = jobs.filter(j => j.status === 'interviewing' || j.status === 'offer');
+  const interviewed = jobs.filter((j: Job) => j.status === 'interviewing' || j.status === 'offer');
   return Math.round((interviewed.length / jobs.length) * 100) + '%';
 }
 
 // Utility: Calculate offer rate
-function getOfferRate(jobs) {
+function getOfferRate(jobs: Job[]): string {
   if (!jobs.length) return '--';
-  const offers = jobs.filter(j => j.status === 'offer');
+  const offers = jobs.filter((j: Job) => j.status === 'offer');
   return Math.round((offers.length / jobs.length) * 100) + '%';
 }
 
 // Utility: Status distribution
-function getStatusDistribution(jobs) {
+function getStatusDistribution(jobs: Job[]) {
   const statusMap = {
     Applied: { name: 'Applied', value: 0, color: '#3b82f6' },
     Interviewing: { name: 'Interviewing', value: 0, color: '#eab308' },
     Offers: { name: 'Offers', value: 0, color: '#22c55e' },
     Rejected: { name: 'Rejected', value: 0, color: '#ef4444' },
   };
-  jobs.forEach(j => {
+  jobs.forEach((j: Job) => {
     if (j.status === 'applied') statusMap.Applied.value++;
     else if (j.status === 'interviewing') statusMap.Interviewing.value++;
     else if (j.status === 'offer') statusMap.Offers.value++;
@@ -59,7 +65,7 @@ function getStatusDistribution(jobs) {
 }
 
 // Utility: Application trends (last 6 months)
-function getApplicationTrends(jobs) {
+function getApplicationTrends(jobs: Job[]) {
   const months = getLast6Months();
   const trends = months.map((month, idx) => {
     // Get the year/month for this slot
@@ -68,26 +74,26 @@ function getApplicationTrends(jobs) {
     const year = d.getFullYear();
     const m = d.getMonth();
     // Filter jobs for this month
-    const jobsInMonth = jobs.filter(j => {
-      const applied = new Date(j.appliedDate);
+    const jobsInMonth = jobs.filter((j: Job) => {
+      const applied = j.appliedDate instanceof Date ? j.appliedDate : new Date(j.appliedDate as any);
       return applied.getMonth() === m && applied.getFullYear() === year;
     });
     return {
       month,
       applications: jobsInMonth.length,
-      interviews: jobsInMonth.filter(j => j.status === 'interviewing' || j.status === 'offer').length,
-      offers: jobsInMonth.filter(j => j.status === 'offer').length,
+      interviews: jobsInMonth.filter((j: Job) => j.status === 'interviewing' || j.status === 'offer').length,
+      offers: jobsInMonth.filter((j: Job) => j.status === 'offer').length,
     };
   });
   return trends;
 }
 
 // Utility: Company type analysis (example based on job.companyType)
-function getCompanyTypes(jobs) {
+function getCompanyTypes(jobs: Job[]) {
   // You may need to adjust this if your job objects have a different structure
   const types = ['Startup', 'Mid-size', 'Enterprise', 'Agency'];
   return types.map(type => {
-    const jobsOfType = jobs.filter(j => j.companyType === type);
+    const jobsOfType = jobs.filter((j: Job) => (j as any).companyType === type);
     return {
       type,
       count: jobsOfType.length,
