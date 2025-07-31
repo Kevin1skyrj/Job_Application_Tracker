@@ -12,7 +12,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, Bell, Target, MapPin, Phone, Mail, Video } from "lucide-react"
 import { useReminders } from "@/hooks/use-reminders"
+import { useUser } from "@clerk/nextjs"
 import { useToast } from "@/hooks/use-toast"
+
 
 interface ScheduleDialogProps {
   children: React.ReactNode
@@ -23,6 +25,7 @@ export function ScheduleDialog({ children }: ScheduleDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { addReminder } = useReminders()
   const { toast } = useToast()
+  const { user } = useUser();
   const [scheduleData, setScheduleData] = useState({
     title: "",
     type: "interview" as "interview" | "follow-up" | "deadline" | "reminder",
@@ -41,10 +44,12 @@ export function ScheduleDialog({ children }: ScheduleDialogProps) {
       // Create the scheduled event as a reminder
       const eventDateTime = new Date(`${scheduleData.date}T${scheduleData.time}`)
       
-      addReminder({
+      if (!user?.id) throw new Error("User not found");
+      await addReminder({
+        userId: user.id,
         title: scheduleData.title,
         description: scheduleData.description || undefined,
-        dueDate: eventDateTime,
+        dueDate: eventDateTime.toISOString(),
         type: scheduleData.type === "reminder" ? "general" : scheduleData.type,
         isCompleted: false,
         priority: scheduleData.type === "deadline" ? "high" : scheduleData.type === "interview" ? "medium" : "low",

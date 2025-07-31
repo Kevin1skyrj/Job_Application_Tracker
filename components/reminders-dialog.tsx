@@ -21,7 +21,6 @@ export function RemindersDialog({ children }: RemindersDialogProps) {
     getActiveReminders, 
     getOverdueReminders, 
     getUpcomingReminders,
-    completeReminder, 
     deleteReminder 
   } = useReminders()
 
@@ -103,15 +102,7 @@ export function RemindersDialog({ children }: RemindersDialogProps) {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => completeReminder(reminder.id)}
-                className="h-8 w-8 p-0 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20"
-              >
-                <CheckCircle className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => deleteReminder(reminder.id)}
+                onClick={() => deleteReminder(reminder._id)}
                 className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
               >
                 <Trash2 className="h-4 w-4" />
@@ -158,7 +149,7 @@ export function RemindersDialog({ children }: RemindersDialogProps) {
                   </div>
                   <div className="space-y-3">
                     {overdueReminders.map((reminder) => (
-                      <ReminderCard key={reminder.id} reminder={reminder} />
+                      <ReminderCard key={reminder._id} reminder={reminder} />
                     ))}
                   </div>
                   <Separator className="my-4" />
@@ -174,7 +165,7 @@ export function RemindersDialog({ children }: RemindersDialogProps) {
                   </div>
                   <div className="space-y-3">
                     {upcomingReminders.map((reminder) => (
-                      <ReminderCard key={reminder.id} reminder={reminder} />
+                      <ReminderCard key={reminder._id} reminder={reminder} />
                     ))}
                   </div>
                   <Separator className="my-4" />
@@ -194,7 +185,7 @@ export function RemindersDialog({ children }: RemindersDialogProps) {
                     {activeReminders
                       .filter(r => !overdueReminders.includes(r) && !upcomingReminders.includes(r))
                       .map((reminder) => (
-                        <ReminderCard key={reminder.id} reminder={reminder} />
+                        <ReminderCard key={reminder._id} reminder={reminder} />
                       ))}
                   </div>
                 </div>
