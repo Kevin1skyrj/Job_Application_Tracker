@@ -63,11 +63,18 @@ export function useGoals() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.id, target, month, year })
       });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
       const data = await res.json();
       setGoals([data]);
       toast({ title: "Goal Set", description: `Monthly goal set to ${target} applications` });
     } catch (error) {
+      console.error("Error setting goal:", error);
       toast({ title: "Error", description: "Failed to set goal", variant: "destructive" });
+      throw error; // Re-throw so calling component can handle it
     } finally {
       setIsLoading(false);
     }
@@ -81,15 +88,22 @@ export function useGoals() {
     const year = now.getFullYear();
     setIsLoading(true);
     try {
-      await fetch(`${API_URL}/goals`, {
+      const res = await fetch(`${API_URL}/goals`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.id, month, year })
       });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
       setGoals([]);
       toast({ title: "Goal Removed", description: "Monthly goal has been removed", variant: "destructive" });
     } catch (error) {
+      console.error("Error removing goal:", error);
       toast({ title: "Error", description: "Failed to remove goal", variant: "destructive" });
+      throw error; // Re-throw so calling component can handle it
     } finally {
       setIsLoading(false);
     }

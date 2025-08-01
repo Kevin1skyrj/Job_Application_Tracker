@@ -6,7 +6,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts"
 import { TrendingUp, TrendingDown, Target, Calendar, Award, Zap } from "lucide-react"
 import { useJobsContext } from "@/contexts/jobs-context"
-import { useGoals } from "@/hooks/use-goals"
+import { useGoalsContext } from "@/contexts/goals-context"
 
 // Utility: Get last 6 months labels
 function getLast6Months() {
@@ -104,7 +104,7 @@ function getCompanyTypes(jobs: Job[]) {
 
 export function AnalyticsDashboard() {
   const { jobs = [] } = useJobsContext();
-  const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoals();
+  const { getCurrentMonthGoal, calculateMonthlyProgress } = useGoalsContext();
 
   // Calculate current month applications
   const currentMonth = new Date().getMonth();

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useGoals } from "@/hooks/use-goals"
+import { useGoalsContext } from "@/contexts/goals-context"
 import { Target, TrendingUp, Calendar, Zap, Trash2 } from "lucide-react"
 import {
   AlertDialog,
@@ -30,7 +30,7 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
   const [open, setOpen] = useState(false)
   const [goalTarget, setGoalTarget] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { getCurrentMonthGoal, setMonthlyGoal, removeMonthlyGoal } = useGoals()
+  const { getCurrentMonthGoal, setMonthlyGoal, removeMonthlyGoal } = useGoalsContext()
 
   const currentGoal = getCurrentMonthGoal()
   const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
@@ -46,7 +46,7 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
     setIsLoading(true)
 
     try {
-      setMonthlyGoal(target)
+      await setMonthlyGoal(target)
       setGoalTarget("")
       setOpen(false)
     } catch (error) {
@@ -59,7 +59,7 @@ export function SetGoalDialog({ children }: SetGoalDialogProps) {
   const handleRemoveGoal = async () => {
     setIsLoading(true)
     try {
-      removeMonthlyGoal()
+      await removeMonthlyGoal()
       setGoalTarget("")
       setOpen(false)
     } catch (error) {
