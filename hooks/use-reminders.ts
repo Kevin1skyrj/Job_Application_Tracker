@@ -1,9 +1,8 @@
 "use client"
 
-
 import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
-import { useUser } from "@clerk/nextjs"
+import { useUser, useAuth } from "@clerk/nextjs"
 
 export interface Reminder {
   _id: string
@@ -21,16 +20,24 @@ export interface Reminder {
 export function useReminders() {
   const { toast } = useToast();
   const { user } = useUser();
+  const { getToken, isSignedIn } = useAuth();
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
+  // Align base URL with lib/api.ts fallback
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
   // Load reminders from backend
   const fetchReminders = async () => {
-    if (!user?.id) return;
+    if (!user?.id || !isSignedIn) return;
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_URL}/schedules?userId=${user.id}`);
+      const token = await getToken();
+      const res = await fetch(`${API_URL}/schedules?userId=${user.id}` , {
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
       const data = await res.json();
       setReminders(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -71,12 +78,16 @@ export function useReminders() {
 
   // Add new reminder
   const addReminder = async (reminderData: Omit<Reminder, "_id" | "createdAt">) => {
-    if (!user?.id) return;
+    if (!user?.id || !isSignedIn) return;
     setIsLoading(true);
     try {
+      const token = await getToken();
       const res = await fetch(`${API_URL}/schedules`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ ...reminderData, userId: user.id })
       });
       const data = await res.json();
@@ -94,7 +105,13 @@ export function useReminders() {
   const deleteReminder = async (reminderId: string) => {
     setIsLoading(true);
     try {
-      await fetch(`${API_URL}/schedules/${reminderId}`, { method: "DELETE" });
+      const token = await getToken();
+      await fetch(`${API_URL}/schedules/${reminderId}`, {
+        method: "DELETE",
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        }
+      });
       setReminders(prev => prev.filter(r => r._id !== reminderId));
       toast({ title: "Reminder Deleted", description: "Reminder has been deleted" });
     } catch (error) {
