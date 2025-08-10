@@ -151,7 +151,7 @@ export function JobBoard() {
             </div>
 
             <AddJobDialog>
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+              <Button className="bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white shadow-lg">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Job
               </Button>

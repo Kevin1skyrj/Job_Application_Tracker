@@ -16,7 +16,7 @@ export default function HomePage() {
   const { isSignedIn } = useAuth()
   const { user } = useUser()
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#f3f5f4] via-[#ffffff] to-[#d9d8d6] dark:from-[#000000] dark:via-[#33322d] dark:to-[#000000]">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
@@ -32,14 +32,14 @@ export default function HomePage() {
           <div className="flex items-center space-x-2 sm:space-x-4">
             {isSignedIn ? (
               <Link href="/dashboard">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2">
+                <Button className="bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2 text-white">
                   Dashboard
                   <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </Link>
             ) : (
               <Link href="/sign-in">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2">
+                <Button className="bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] shadow-lg text-xs sm:text-sm px-3 sm:px-4 py-2 text-white">
                   Sign In
                   <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
@@ -72,7 +72,7 @@ export default function HomePage() {
               <Link href="/dashboard" className="w-full sm:w-auto sm:mx-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white shadow-xl"
                 >
                   Go to Dashboard
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -82,7 +82,7 @@ export default function HomePage() {
               <Link href="/sign-up" className="w-full sm:w-auto sm:mx-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white shadow-xl"
                 >
                   Start Tracking Jobs
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -93,7 +93,7 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-[#f3f5f4] dark:hover:bg-[#33322d]"
                 onClick={() => setShowTour(true)}
               >
                 <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -102,7 +102,7 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-lg bg-transparent hover:bg-[#f3f5f4] dark:hover:bg-[#33322d]"
                 onClick={() => setShowFeatures(true)}
               >
                 View Features
@@ -217,7 +217,7 @@ export default function HomePage() {
 
       {/* Interactive Preview Section */}
       <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12">
+  <div className="bg-gradient-to-r from-[#f3f5f4] to-[#d9d8d6] dark:from-[#33322d] dark:to-[#000000] rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12">
         <div className="text-center mb-8 sm:mb-12">
           <Badge variant="outline" className="mb-3 sm:mb-4">
             <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -314,7 +314,7 @@ export default function HomePage() {
             <div className="space-y-3 sm:space-y-4">
               <Button
                 size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm sm:text-base py-3 sm:py-4"
+                className="w-full bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white text-sm sm:text-base py-3 sm:py-4"
                 onClick={() => setShowTour(true)}
               >
                 <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -367,20 +367,20 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
-        <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 lg:p-16 text-white mx-2 sm:mx-0">
+    <section className="container mx-auto px-2 sm:px-4 py-12 sm:py-16 lg:py-20">
+  <div className="text-center bg-gradient-to-r from-[#6f706b] to-[#33322d] rounded-2xl sm:rounded-3xl p-8 sm:p-12 lg:p-16 text-white mx-2 sm:mx-0">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Ready to supercharge your job search?</h3>
           <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90">Join thousands of successful job seekers using JobFlow</p>
           {isSignedIn ? (
             <Link href="/dashboard">
-              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl w-full sm:w-auto">
+              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-[#33322d] hover:bg-gray-100 shadow-xl w-full sm:w-auto">
                 Go to Dashboard
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </Link>
           ) : (
             <Link href="/sign-up">
-              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-blue-600 hover:bg-gray-100 shadow-xl w-full sm:w-auto">
+              <Button size="lg" className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg bg-white text-[#33322d] hover:bg-gray-100 shadow-xl w-full sm:w-auto">
                 Get Started Free Today
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>

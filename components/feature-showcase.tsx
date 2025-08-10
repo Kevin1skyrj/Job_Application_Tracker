@@ -192,8 +192,8 @@ export function FeatureShowcase({ open, onOpenChange }: FeatureShowcaseProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0">
-        <DialogHeader className="px-6 py-4 border-b bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+    <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0">
+  <DialogHeader className="px-6 py-4 border-b bg-gradient-to-r from-[#f3f5f4] to-[#d9d8d6] dark:from-[#33322d] dark:to-[#000000]">
           <DialogTitle className="text-2xl font-bold">
             🚀 Explore JobTracker Features
           </DialogTitle>
@@ -246,7 +246,7 @@ export function FeatureShowcase({ open, onOpenChange }: FeatureShowcaseProps) {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-8 p-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg text-white">
+            <div className="mt-8 p-4 bg-gradient-to-r from-[#6f706b] to-[#33322d] rounded-lg text-white">
               <h4 className="font-semibold mb-2">Ready to get started?</h4>
               <p className="text-sm mb-3 text-blue-100">
                 Join thousands of successful job seekers today!

@@ -29,7 +29,7 @@ const tourSteps = [
     description: "Let's take a quick tour of the powerful features that will transform your job search.",
     content: (
       <div className="text-center space-y-6">
-        <div className="w-24 h-24 mx-auto bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+  <div className="w-24 h-24 mx-auto bg-gradient-to-r from-[#33322d] to-[#6f706b] rounded-full flex items-center justify-center">
           <Target className="h-12 w-12 text-white" />
         </div>
         <div>
@@ -236,7 +236,7 @@ const tourSteps = [
             You now know how JobTracker can revolutionize your job search. Ready to get started?
           </p>
         </div>
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-4 rounded-lg">
+  <div className="bg-gradient-to-r from-[#f3f5f4] to-[#d9d8d6] dark:from-[#33322d] dark:to-[#000000] p-4 rounded-lg">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">10,000+</div>

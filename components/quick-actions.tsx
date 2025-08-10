@@ -20,7 +20,7 @@ export function QuickActions() {
       <CardContent className="p-4">
         <div className="flex items-center gap-3">
           <AddJobDialog>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+            <Button className="bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white shadow-lg">
               <Plus className="h-4 w-4 mr-2" />
               Add Job
             </Button>
@@ -49,7 +49,7 @@ export function QuickActions() {
                     highPriorityCount > 0 
                       ? 'bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-200 dark:from-red-900/20 dark:to-red-800/30 dark:text-red-400 dark:border-red-800/50 hover:from-red-100 hover:to-red-200 dark:hover:from-red-900/30 dark:hover:to-red-800/40' 
                       : reminderCount > 0
-                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 border-blue-200 dark:from-blue-900/20 dark:to-purple-900/20 dark:text-blue-400 dark:border-blue-800/50 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/30 dark:hover:to-purple-900/30'
+                        ? 'bg-gradient-to-r from-[#f3f5f4] to-[#d9d8d6] text-[#33322d] border-[#d9d8d6] dark:from-[#33322d] dark:to-[#000000] dark:text-[#f3f5f4] dark:border-[#33322d] hover:from-[#ffffff] hover:to-[#f3f5f4] dark:hover:from-[#33322d] dark:hover:to-[#000000]'
                         : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-600 border-gray-200 dark:from-gray-800/50 dark:to-gray-700/50 dark:text-gray-400 dark:border-gray-700/50 hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-800/70 dark:hover:to-gray-700/70'
                   }`}
                 >
@@ -81,7 +81,7 @@ export function QuickActions() {
                 
                 {/* Hover Glow Effect */}
                 <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm ${
-                  highPriorityCount > 0 ? 'bg-red-400' : 'bg-blue-400'
+                  highPriorityCount > 0 ? 'bg-red-400' : 'bg-[#6f706b]'
                 }`} />
               </div>
             </RemindersDialog>

@@ -26,7 +26,7 @@ export default function Page() {
   // If user is already signed in, show loading while redirecting
   if (isLoaded && isSignedIn) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#f3f5f4] via-[#ffffff] to-[#d9d8d6] dark:from-[#000000] dark:via-[#33322d] dark:to-[#000000] flex items-center justify-center">
         <div className="text-center">
           <img 
             src="/logo/logoJobflow.png" 
@@ -40,7 +40,7 @@ export default function Page() {
               const redirectUrl = searchParams.get('redirect_url') || '/dashboard'
               router.replace(redirectUrl)
             }}
-            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all"
+            className="px-6 py-2 bg-gradient-to-r from-[#33322d] to-[#6f706b] text-white rounded-lg hover:from-[#000000] hover:to-[#33322d] transition-all"
           >
             Go Now
           </button>
@@ -50,7 +50,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#f3f5f4] via-[#ffffff] to-[#d9d8d6] dark:from-[#000000] dark:via-[#33322d] dark:to-[#000000] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img 

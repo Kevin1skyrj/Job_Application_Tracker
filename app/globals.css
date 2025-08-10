@@ -115,11 +115,13 @@
 
 /* Gradient backgrounds */
 .gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Neutral: #33322d → #6f706b */
+  background: linear-gradient(135deg, #33322d 0%, #6f706b 100%);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Neutral: #33322d → #6f706b */
+  background: linear-gradient(135deg, #33322d 0%, #6f706b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

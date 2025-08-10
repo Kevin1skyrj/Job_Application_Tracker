@@ -100,7 +100,7 @@ export function JobDetailsDialog({ job, open, onOpenChange }: JobDetailsDialogPr
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
           <div className="flex flex-col h-full">
             {/* Header */}
-            <DialogHeader className="px-6 py-4 border-b bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+            <DialogHeader className="px-6 py-4 border-b bg-gradient-to-r from-[#f3f5f4] to-[#d9d8d6] dark:from-[#33322d] dark:to-[#000000]">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white mb-2">

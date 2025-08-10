@@ -205,7 +205,7 @@ export function EditJobDialog({ job, open, onOpenChange }: EditJobDialogProps) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="px-6 bg-gradient-to-r from-[#33322d] to-[#6f706b] hover:from-[#000000] hover:to-[#33322d] text-white"
             >
               {isLoading ? "Updating..." : "Update Application"}
             </Button>
