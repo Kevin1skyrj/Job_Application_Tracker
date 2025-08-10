@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, Bell, Target, MapPin, Phone, Mail, Video } from "lucide-react"
-import { useReminders } from "@/hooks/use-reminders"
+import { useReminders } from "@/contexts/reminders-context"
 import { useUser } from "@clerk/nextjs"
 import { useToast } from "@/hooks/use-toast"
 

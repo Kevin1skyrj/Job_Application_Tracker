@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { QueryProvider } from "@/components/query-provider"
 import { NavigationProvider } from "@/components/navigation-provider"
 import { ClerkProvider } from '@clerk/nextjs'
+import { RemindersProvider } from "@/contexts/reminders-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -33,10 +34,12 @@ export default function RootLayout({
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <QueryProvider>
-              <NavigationProvider>
-                {children}
-                <Toaster />
-              </NavigationProvider>
+              <RemindersProvider>
+                <NavigationProvider>
+                  {children}
+                  <Toaster />
+                </NavigationProvider>
+              </RemindersProvider>
             </QueryProvider>
           </ThemeProvider>
         </body>

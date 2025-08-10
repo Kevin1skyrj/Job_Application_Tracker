@@ -8,7 +8,7 @@ import { AddJobDialog } from "@/components/add-job-dialog"
 import { SetGoalDialog } from "@/components/set-goal-dialog"
 import { ScheduleDialog } from "@/components/schedule-dialog"
 import { RemindersDialog } from "@/components/reminders-dialog"
-import { useReminders } from "@/hooks/use-reminders"
+import { useReminders } from "@/contexts/reminders-context"
 
 export function QuickActions() {
   const { getReminderCount, getHighPriorityCount } = useReminders()

@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Bell, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { RemindersDialog } from "@/components/reminders-dialog"
-import { useReminders } from "@/hooks/use-reminders"
+import { useReminders } from "@/contexts/reminders-context"
 import { useUser, UserButton } from '@clerk/nextjs'
 
 export function DashboardHeader() {

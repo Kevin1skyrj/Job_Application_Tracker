@@ -157,7 +157,7 @@ export function useReminders() {
     getUpcomingReminders,
     addReminder,
     deleteReminder,
-    getReminderCount,
+    getReminderCount, 
     getHighPriorityCount,
     fetchReminders,
   };

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { useReminders } from "@/hooks/use-reminders"
+import { useReminders } from "@/contexts/reminders-context"
 import { Bell, Calendar, Clock, CheckCircle, Trash2, AlertTriangle, Phone, Mail, Target, User } from "lucide-react"
 import { formatDistanceToNow, format } from "date-fns"
 
