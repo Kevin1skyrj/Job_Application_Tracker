@@ -82,15 +82,33 @@ export function useReminders() {
     setIsLoading(true);
     try {
       const token = await getToken();
+      // Derive date and time strings from dueDate to satisfy backend validation
+      let dateStr: string | undefined;
+      let timeStr: string | undefined;
+      if (reminderData?.dueDate) {
+        const dt = new Date(reminderData.dueDate);
+        if (!isNaN(dt.getTime())) {
+          const iso = dt.toISOString();
+          dateStr = iso.split('T')[0];
+          timeStr = iso.slice(11, 16);
+        }
+      }
       const res = await fetch(`${API_URL}/schedules`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ ...reminderData, userId: user.id })
+        body: JSON.stringify({ 
+          ...reminderData, 
+          userId: user.id,
+          ...(dateStr && timeStr ? { date: dateStr, time: timeStr } : {}),
+        })
       });
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || 'Failed to create reminder');
+      }
       setReminders(prev => [...prev, data]);
       toast({ title: "Reminder Created", description: `Reminder set for ${data.title}` });
       return data;
