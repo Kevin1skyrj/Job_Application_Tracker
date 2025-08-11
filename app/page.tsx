@@ -21,11 +21,16 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="relative">
+            <div className="relative h-28 sm:h-14 w-44 sm:w-42 flex items-center justify-start overflow-visible">
               <img 
-                src="/logo/logoJobflow.png" 
+                src="/logo/jobflowblacklogo.png" 
                 alt="JobFlow Logo" 
-                className="h-8 sm:h-10 w-auto object-contain" 
+                className="absolute h-36 sm:h-36 w-auto object-contain dark:hidden transform scale-140" 
+              />
+              <img 
+                src="/logo/jobflowwhitelogo.png" 
+                alt="JobFlow Logo" 
+                className="absolute h-36 sm:h-36 w-auto object-contain hidden dark:block transform scale-140" 
               />
             </div>
           </div>
@@ -395,11 +400,18 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start space-x-2 mb-3 sm:mb-4">
-                <img 
-                  src="/logo/logoJobflow.png" 
-                  alt="JobFlow Logo" 
-                  className="h-8 sm:h-10 w-auto object-contain" 
-                />
+                <div className="relative h-20 sm:h-16 w-40 sm:w-44 flex items-center justify-center sm:justify-start overflow-visible">
+                  <img 
+                    src="/logo/jobflowblacklogo.png" 
+                    alt="JobFlow Logo" 
+                    className="absolute h-36 sm:h-36 w-auto object-contain dark:hidden transform scale-140" 
+                  />
+                  <img 
+                    src="/logo/jobflowwhitelogo.png" 
+                    alt="JobFlow Logo" 
+                    className="absolute h-36 sm:h-36 w-auto object-contain hidden dark:block transform scale-140" 
+                  />
+                </div>
               </div>
               <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-2 sm:px-0">
                 The smartest way to track and manage your job applications.

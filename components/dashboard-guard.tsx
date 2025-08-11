@@ -22,11 +22,18 @@ export function DashboardGuard({ children }: DashboardGuardProps) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <img 
-            src="/logo/logoJobflow.png" 
-            alt="JobFlow Logo" 
-            className="h-16 w-auto object-contain mx-auto mb-4 animate-pulse" 
-          />
+          <div className="relative h-16 w-48 mx-auto mb-4 flex items-center justify-center overflow-visible">
+            <img 
+              src="/logo/jobflowblacklogo.png" 
+              alt="JobFlow Logo" 
+              className="absolute h-36 w-auto object-contain animate-pulse dark:hidden transform scale-150" 
+            />
+            <img 
+              src="/logo/jobflowwhitelogo.png" 
+              alt="JobFlow Logo" 
+              className="absolute h-36 w-auto object-contain animate-pulse hidden dark:block transform scale-150" 
+            />
+          </div>
           <div className="text-xl font-semibold gradient-text mb-2">Loading...</div>
           <div className="text-gray-600 dark:text-gray-400">Please wait</div>
         </div>

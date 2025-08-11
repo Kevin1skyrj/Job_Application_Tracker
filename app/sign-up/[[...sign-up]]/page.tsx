@@ -28,11 +28,18 @@ export default function Page() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <img 
-            src="/logo/logoJobflow.png" 
-            alt="JobFlow Logo" 
-            className="h-16 w-auto object-contain mx-auto mb-4 animate-pulse" 
-          />
+          <div className="relative h-16 w-32 mx-auto mb-4 flex items-center justify-center">
+            <img 
+              src="/logo/jobflowblacklogo.png" 
+              alt="JobFlow Logo" 
+              className="h-16 w-auto object-contain animate-pulse dark:hidden" 
+            />
+            <img 
+              src="/logo/jobflowwhitelogo.png" 
+              alt="JobFlow Logo" 
+              className="h-16 w-auto object-contain animate-pulse hidden dark:block" 
+            />
+          </div>
           <div className="text-xl font-semibold gradient-text mb-2">Redirecting to Dashboard...</div>
           <div className="text-gray-600 dark:text-gray-400">Please wait</div>
         </div>
@@ -44,11 +51,18 @@ export default function Page() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <img 
-            src="/logo/logoJobflow.png" 
-            alt="JobFlow Logo" 
-            className="h-16 w-auto object-contain mx-auto mb-4" 
-          />
+          <div className="relative h-16 w-32 mx-auto mb-4 flex items-center justify-center">
+            <img 
+              src="/logo/jobflowblacklogo.png" 
+              alt="JobFlow Logo" 
+              className="h-16 w-auto object-contain dark:hidden" 
+            />
+            <img 
+              src="/logo/jobflowwhitelogo.png" 
+              alt="JobFlow Logo" 
+              className="h-16 w-auto object-contain hidden dark:block" 
+            />
+          </div>
           <h1 className="text-2xl font-bold gradient-text">Get Started</h1>
           <p className="text-gray-600 dark:text-gray-400">Create your JobFlow account</p>
         </div>

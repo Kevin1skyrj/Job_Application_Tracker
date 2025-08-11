@@ -53,13 +53,18 @@ export function AppSidebar() {
       {/* Explicitly set variant and collapsible */}
       <SidebarHeader className="border-b px-6 py-6 bg-white dark:bg-gray-900">
         <div className="flex items-center space-x-3">
-          <div className="relative">
+          <div className="relative h-10 w-32 flex items-center justify-start overflow-visible">
             <img 
-              src="/logo/logoJobflow.png" 
+              src="/logo/jobflowblacklogo.png" 
               alt="JobFlow Logo" 
-              className="h-10 w-auto object-contain" 
+              className="absolute h-24 w-auto object-contain dark:hidden transform scale-150 pl-4" 
             />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+            <img 
+              src="/logo/jobflowwhitelogo.png" 
+              alt="JobFlow Logo" 
+              className="absolute h-24 w-auto object-contain hidden dark:block transform scale-150 pl-4" 
+            />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse z-10" />
           </div>
         </div>
       </SidebarHeader>
