@@ -19,18 +19,18 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-[#f3f5f4] via-[#ffffff] to-[#d9d8d6] dark:from-[#000000] dark:via-[#33322d] dark:to-[#000000]">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-sm dark:bg-gray-900/80">
-        <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="relative h-28 sm:h-14 w-44 sm:w-42 flex items-center justify-start overflow-visible">
+            <div className="relative h-12 sm:h-14 w-32 sm:w-42 flex items-center justify-start overflow-visible">
               <img 
                 src="/logo/jobflowblacklogo.png" 
                 alt="JobFlow Logo" 
-                className="absolute h-36 sm:h-36 w-auto object-contain dark:hidden transform scale-140" 
+                className="absolute h-20 sm:h-36 w-auto object-contain dark:hidden transform scale-110 sm:scale-140" 
               />
               <img 
                 src="/logo/jobflowwhitelogo.png" 
                 alt="JobFlow Logo" 
-                className="absolute h-36 sm:h-36 w-auto object-contain hidden dark:block transform scale-140" 
+                className="absolute h-20 sm:h-36 w-auto object-contain hidden dark:block transform scale-110 sm:scale-140" 
               />
             </div>
           </div>

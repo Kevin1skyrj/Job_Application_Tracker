@@ -121,13 +121,13 @@ export function JobBoard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Search and Filters */}
       <Card className="shadow-lg border-0">
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-1 gap-4 w-full sm:w-auto">
-              <div className="relative flex-1 max-w-md">
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col gap-4 items-stretch sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col sm:flex-row flex-1 gap-3 sm:gap-4 w-full">
+              <div className="relative flex-1 max-w-full sm:max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Search jobs, companies..."
@@ -138,7 +138,7 @@ export function JobBoard() {
               </div>
 
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40 bg-gray-50 dark:bg-gray-800 border-0">
+                <SelectTrigger className="w-full sm:w-40 bg-gray-50 dark:bg-gray-800 border-0">
                   <SortAsc className="h-4 w-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
@@ -178,7 +178,7 @@ export function JobBoard() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 relative z-10">
             {columns.map((column, columnIndex) => {
               const columnJobs = getJobsByStatus(column.id)
 
@@ -196,7 +196,7 @@ export function JobBoard() {
                   
                   <Card 
                     key={column.id} 
-                    className={`flex flex-col h-fit min-h-96 shadow-xl border-0 ${column.bgColor} backdrop-blur-sm relative overflow-hidden group hover:shadow-2xl transition-all duration-300`}
+                    className={`flex flex-col h-fit min-h-64 sm:min-h-96 shadow-xl border-0 ${column.bgColor} backdrop-blur-sm relative overflow-hidden group hover:shadow-2xl transition-all duration-300`}
                   >
                     {/* Subtle gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5 pointer-events-none" />
@@ -204,24 +204,24 @@ export function JobBoard() {
                     {/* Top accent line */}
                     <div className={`absolute top-0 left-0 right-0 h-1 ${column.color} shadow-sm`} />
                     
-                    <CardHeader className="pb-4 relative z-10">
+                    <CardHeader className="pb-3 sm:pb-4 relative z-10">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
                           <div className="flex items-center space-x-2">
-                            <div className={`w-4 h-4 rounded-full ${column.color} shadow-lg ring-2 ring-white/50 dark:ring-gray-800/50`} />
-                            <span className="text-lg">{column.icon}</span>
+                            <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${column.color} shadow-lg ring-2 ring-white/50 dark:ring-gray-800/50`} />
+                            <span className="text-sm sm:text-lg">{column.icon}</span>
                           </div>
-                          <CardTitle className={`text-sm font-bold ${column.textColor}`}>{column.title}</CardTitle>
+                          <CardTitle className={`text-xs sm:text-sm font-bold ${column.textColor}`}>{column.title}</CardTitle>
                         </div>
                         <Badge
                           variant="secondary"
-                          className={`${column.textColor} bg-white/70 dark:bg-gray-800/70 font-semibold shadow-sm backdrop-blur-sm border border-white/30`}
+                          className={`${column.textColor} bg-white/70 dark:bg-gray-800/70 font-semibold shadow-sm backdrop-blur-sm border border-white/30 text-xs`}
                         >
                           {columnJobs.length}
                         </Badge>
                       </div>
                       {/* Decorative bottom border */}
-                      <div className="mt-3 w-full h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
+                      <div className="mt-2 sm:mt-3 w-full h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
                     </CardHeader>
 
                 <Droppable droppableId={column.id}>
@@ -229,7 +229,7 @@ export function JobBoard() {
                     <CardContent
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className={`flex-1 space-y-4 transition-all duration-200 ${
+                      className={`flex-1 space-y-3 sm:space-y-4 transition-all duration-200 ${
                         snapshot.isDraggingOver ? "bg-white/50 dark:bg-gray-800/50 rounded-lg" : ""
                       }`}
                     >
@@ -252,12 +252,12 @@ export function JobBoard() {
                       {provided.placeholder}
 
                       {columnJobs.length === 0 && (
-                        <div className="text-center py-12 text-muted-foreground">
-                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/50 dark:bg-gray-800/50 flex items-center justify-center">
-                            <Plus className="h-8 w-8" />
+                        <div className="text-center py-8 sm:py-12 text-muted-foreground">
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 rounded-full bg-white/50 dark:bg-gray-800/50 flex items-center justify-center">
+                            <Plus className="h-6 w-6 sm:h-8 sm:w-8" />
                           </div>
-                          <p className="text-sm font-medium">No jobs in {column.title.toLowerCase()}</p>
-                          <p className="text-xs mt-1">Drag jobs here or add new ones</p>
+                          <p className="text-xs sm:text-sm font-medium">No jobs in {column.title.toLowerCase()}</p>
+                          <p className="text-xs mt-1 hidden sm:block">Drag jobs here or add new ones</p>
                         </div>
                       )}
                     </CardContent>

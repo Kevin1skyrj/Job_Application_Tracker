@@ -126,51 +126,51 @@ export function AnalyticsDashboard() {
   const companyTypes = getCompanyTypes(jobs);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <Card className="shadow-lg border-0">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Response Time</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium">Avg. Response Time</CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{avgResponseTime}</div>
+            <div className="text-xl sm:text-2xl font-bold">{avgResponseTime}</div>
             {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
         <Card className="shadow-lg border-0">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Interview Rate</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium">Interview Rate</CardTitle>
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{interviewRate}</div>
+            <div className="text-xl sm:text-2xl font-bold">{interviewRate}</div>
             {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
         <Card className="shadow-lg border-0">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Offer Rate</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium">Offer Rate</CardTitle>
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{offerRate}</div>
+            <div className="text-xl sm:text-2xl font-bold">{offerRate}</div>
             {/* You can add a trend indicator here if you calculate it */}
           </CardContent>
         </Card>
 
         <Card className="shadow-lg border-0">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Goal</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium">Monthly Goal</CardTitle>
             <Zap className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             {currentGoal ? (
               <>
-                <div className="text-2xl font-bold">{Math.min(progress.percentage, 100)}%</div>
+                <div className="text-xl sm:text-2xl font-bold">{Math.min(progress.percentage, 100)}%</div>
                 <div className="flex items-center text-xs text-purple-600">
                   <Target className="h-3 w-3 mr-1" />
                   {jobsThisMonth}/{currentGoal.target} applications
@@ -184,7 +184,7 @@ export function AnalyticsDashboard() {
               </>
             ) : (
               <>
-                <div className="text-2xl font-bold text-muted-foreground">--</div>
+                <div className="text-xl sm:text-2xl font-bold text-muted-foreground">--</div>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <Target className="h-3 w-3 mr-1" />
                   No goal set
@@ -196,12 +196,12 @@ export function AnalyticsDashboard() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {/* Application Trends */}
         <Card className="shadow-lg border-0">
           <CardHeader>
-            <CardTitle>Application Trends</CardTitle>
-            <CardDescription>Your job search activity over the last 6 months</CardDescription>
+            <CardTitle className="text-lg sm:text-xl">Application Trends</CardTitle>
+            <CardDescription className="text-sm">Your job search activity over the last 6 months</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer
@@ -210,7 +210,7 @@ export function AnalyticsDashboard() {
                 interviews: { label: "Interviews", color: "hsl(var(--chart-2))" },
                 offers: { label: "Offers", color: "hsl(var(--chart-3))" },
               }}
-              className="h-80"
+              className="h-64 sm:h-80"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={applicationTrends}>
@@ -230,8 +230,8 @@ export function AnalyticsDashboard() {
         {/* Status Distribution */}
         <Card className="shadow-lg border-0">
           <CardHeader>
-            <CardTitle>Application Status</CardTitle>
-            <CardDescription>Current distribution of your applications</CardDescription>
+            <CardTitle className="text-lg sm:text-xl">Application Status</CardTitle>
+            <CardDescription className="text-sm">Current distribution of your applications</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer
@@ -241,7 +241,7 @@ export function AnalyticsDashboard() {
                 offers: { label: "Offers", color: "#22c55e" },
                 rejected: { label: "Rejected", color: "#ef4444" },
               }}
-              className="h-80"
+              className="h-64 sm:h-80"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

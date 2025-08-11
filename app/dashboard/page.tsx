@@ -40,15 +40,17 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8 animate-in">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 sm:space-y-8 animate-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-bold gradient-text">
+          <h1 className="text-2xl sm:text-4xl font-bold gradient-text">
             Welcome back{user?.firstName ? `, ${user.firstName}` : ''}! 👋
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">Track and manage your job search journey</p>
+          <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm sm:text-base">Track and manage your job search journey</p>
         </div>
-        <QuickActions />
+        <div className="self-start sm:self-auto">
+          <QuickActions />
+        </div>
       </div>
 
       <GoalProgressIndicator />
